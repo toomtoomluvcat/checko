@@ -11,6 +11,10 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        kanit: ["Kanit", "sans-serif"],
+        biryani: ["Biryani", "sans-serif"], 
+      },
     },
   },
   plugins: [],
