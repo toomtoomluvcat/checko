@@ -8,6 +8,9 @@ function Page() {
   return (
     <>
     <Landing1></Landing1>
+    <Landing2></Landing2>
+    <Landing3></Landing3>
+    <Landing4></Landing4>
     </>
   )
 }
