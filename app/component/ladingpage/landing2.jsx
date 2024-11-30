@@ -16,7 +16,7 @@ function Landing2() {
         </div>
         <div className="flex gap-[20px] text-[0.905rem] font-medium  ">
           <button className="border-[3px] hover:text-[#292929] hover:border-[#292929] border-black px-[40px] py-[7px] rounded-[12px]">ย้อนกลับ</button>
-          <button className="bg-black text-white  hover:bg-[#292929] transition-all px-[40px] py-[7px] rounded-[12px]">เริ่มกันเลย</button>
+          <button className="bg-black text-white  hover:bg-[#292929] transition-all px-[40px] py-[7px] rounded-[12px]">ขั้นตอนถัดไป</button>
         </div>
       </div>
        {/*rounded mean border-raduis 
