@@ -6,15 +6,19 @@ import {useRouter} from "next/navigation";
 
 function Landing4({onBack2}) {
   const[canClick,setcanClick] = useState(false);
+  const [cooldown,setCooldown] = useState(5);
   const router = useRouter()
   
   useEffect(() =>{
-    const time = setTimeout(() =>{
+    if (cooldown ===0){
       setcanClick(true);
-    }, 5000);
-
-    return () => clearTimeout(time);
-  },[]);
+    } else{
+      const interval = setInterval(()=> { //ลดค่าตัวจับเวลา
+        setCooldown((prev) => prev-1)
+      },1000);
+      return () => clearInterval(interval);
+    }
+},[cooldown]);
 
   const handlesubmit = (e)=>{
     e.preventDefault();
@@ -44,7 +48,7 @@ function Landing4({onBack2}) {
           disabled = {!canClick}
           >
           
-            ขั้นตอนถัดไป
+            {canClick ? "เริ่มกันเลย !" : `รออีก ${cooldown} วินาที`}
           </button>
         </div>
       </div>

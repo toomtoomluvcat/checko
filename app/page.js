@@ -5,10 +5,10 @@ import Landing1 from './component/ladingpage/landing1'
 import Landing2 from './component/ladingpage/landing2'
 import Landing4 from './component/ladingpage/landing4'
 import Landing3 from './component/ladingpage/landing3'
+import Point from './component/ladingpage/point';
 
 function Page(){
   const [page,setPage] = useState("landing1");
-
   return(
     <div>
       {page === "landing1" &&(
@@ -27,6 +27,7 @@ function Page(){
       {page === "landing4" && (
         <Landing4 onBack2={() => setPage("landing3")}/>
       )}
+      <Point value={page}></Point>
     </div>
   )
 }
