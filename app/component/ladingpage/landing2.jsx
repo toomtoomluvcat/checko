@@ -1,7 +1,8 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 
-function Landing2() {
+function Landing2({onClick1,onBack}) {
   return (
     <div className="flex gap-y-[60px] gap-x-[150px] flex-col sm:flex-row-reverse justify-center h-screen items-center">
       <div className="flex flex-col sm:items-start items-center">
@@ -13,10 +14,13 @@ function Landing2() {
           รวมทั้งภาพแคปหน้าจอ จะไม่สามารถใช้งานกับระบบตรวจสอบข้อมูลได้
         </p>
         <div className="flex gap-x-[10px] sm:gap-[20px] mt-[25px] sm:mt-[35px] text-[0.67rem] sm:text-[0.905rem] font-medium  ">
-          <button className="border-[2px] sm:border-[3px] hover:text-[#292929] hover:border-[#292929] border-black px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]">
+          <button className="border-[2px] sm:border-[3px] hover:text-[#292929] hover:border-[#292929] border-black px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]"
+          onClick={onBack}
+          >
             ย้อนกลับ
           </button>
-          <button className="bg-black text-white  hover:bg-[#292929] transition-all px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]">
+          <button className="bg-black text-white  hover:bg-[#292929] transition-all px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]"
+          onClick={onClick1}>
             ขั้นตอนถัดไป
           </button>
         </div>

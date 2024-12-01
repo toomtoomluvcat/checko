@@ -1,7 +1,9 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 
-function Landing1() {
+function Landing1({onClick}) {
   return (
     <div className="flex flex-col sm:gap-[120px] gap-[45px] sm:flex-row items-center justify-center  h-screen">
       <div className="relative right-[0px] xl:right-[50px]">
@@ -25,7 +27,9 @@ function Landing1() {
           เพียง 3 ขั้นตอนในการเข้าใช้งานง่ายๆ
           จะได้ไม่พลาดการเช็คชื่อเข้าร่วมชั้นเรียน
         </p>
-        <button className="sm:text-[26px] font-medium sm:translate-y-[20px] translate-y-[-10px] text-white bg-black px-[80px] sm:px-[88px] py-[10px] rounded-[15px]">
+        <button className="sm:text-[26px] font-medium sm:translate-y-[20px] translate-y-[-10px] text-white bg-black px-[80px] sm:px-[88px] py-[10px] rounded-[15px]"
+        onClick = {onClick}
+        >
           เริ่มกันเลย
         </button>
       </div>

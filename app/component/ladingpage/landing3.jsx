@@ -1,7 +1,8 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 
-function Landing3() {
+function Landing3({onClick2,onBack1}) {
   return (
     <>
       <div className="h-screen justify-center flex items-center">
@@ -29,10 +30,13 @@ function Landing3() {
               </p>
             </div>
             <div className="flex gap-x-[10px] sm:gap-[20px] sm:mt-[5px] text-[0.67rem] sm:text-[0.905rem] font-medium">
-              <button className="border-[2px] sm:border-[3px] hover:text-[#292929] hover:border-[#292929] border-black px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]">
+              <button className="border-[2px] sm:border-[3px] hover:text-[#292929] hover:border-[#292929] border-black px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]"
+              onClick={onBack1}
+              >
                 ย้อนกลับ
               </button>
-              <button className="bg-black text-white  hover:bg-[#292929] transition-all px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]">
+              <button className="bg-black text-white  hover:bg-[#292929] transition-all px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]"
+              onClick={onClick2}>
                 ขั้นตอนถัดไป
               </button>
             </div>

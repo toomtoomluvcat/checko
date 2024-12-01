@@ -1,7 +1,25 @@
-import React from "react";
-import Image from "next/image";
+"use client"
 
-function Landing4() {
+import React,{useEffect, useState} from "react";
+import Image from "next/image";
+import {useRouter} from "next/navigation";
+
+function Landing4({onBack2}) {
+  const[canClick,setcanClick] = useState(false);
+  const router = useRouter()
+  
+  useEffect(() =>{
+    const time = setTimeout(() =>{
+      setcanClick(true);
+    }, 5000);
+
+    return () => clearTimeout(time);
+  },[]);
+
+  const handlesubmit = (e)=>{
+    e.preventDefault();
+    router.push('https://forms.gle/YV2x4YDYX14PV7qZ8')
+  }
   return (
     <div className="flex flex-col-reverse gap-x-[150px] sm:flex-row justify-center h-screen items-center flex-shrink-1">
       <div className="flex flex-col gap-[35px] sm:items-start items-center">
@@ -17,10 +35,17 @@ function Landing4() {
           </p>
         </div>
         <div className="flex gap-x-[10px] sm:gap-[20px] sm:mt-[5px] text-[0.67rem] sm:text-[0.905rem] font-medium">
-          <button className="border-[2px] sm:border-[3px] hover:text-[#292929] hover:border-[#292929] border-black px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]">
+          <button onClick={onBack2} className="border-[2px] sm:border-[3px] hover:text-[#292929] hover:border-[#292929] border-black px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]">
             ย้อนกลับ
           </button>
-          <button className="bg-black text-white  hover:bg-[#292929] transition-all px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]">
+          <button 
+          onClick={handlesubmit} 
+          className={`transition-all px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px] ${
+            canClick ? "bg-black text-white hover:bg-[#292929]" : "bg-gray-200 text-white cursor-not-allowed"
+          }`} 
+          disabled = {!canClick}
+          >
+          
             ขั้นตอนถัดไป
           </button>
         </div>
