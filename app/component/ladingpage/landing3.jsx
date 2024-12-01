@@ -5,13 +5,13 @@ import Image from "next/image";
 function Landing3({onClick2,onBack1}) {
   return (
     <>
-      <div className="h-screen justify-center flex items-center">
-        <div className="flex gap-x-[200px] justify-center items-center flex-col sm:flex-row  ">
+      <div className=" justify-center flex  sm:gap-[120px] gap-[45px]">
+        <div className="flex gap-x-[200px] justify-center items-center flex-col sm:flex-row  items-center  ">
           <Image
             className="my-[30px] sm:my-[0px] w-[200px] h-[200px] sm:w-[382px] sm:h-[382px]"
             src="/image/girlwithgps.png"
-            width={1500}
-            height={1500}
+            width={900}
+            height={900}
             quality={100}
             alt="girlwithgps"
           ></Image>

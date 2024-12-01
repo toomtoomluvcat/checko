@@ -5,15 +5,15 @@ import Image from "next/image";
 
 function Landing1({onClick}) {
   return (
-    <div className="flex flex-col sm:gap-[120px] gap-[45px] sm:flex-row items-center justify-center  h-screen">
+    <div className="flex flex-col sm:gap-[120px] gap-[45px] sm:flex-row  justify-center items-center  ">
       <div className="relative right-[0px] xl:right-[50px]">
         <Image
           src="/image/Untitled-2.png"
           alt="allBox"
-          width={1500}
-          height={1500}
+          width={900}
+          height={900}
           quality={100}
-           className="w-[200px] h-[200px] sm:w-[437px] sm:h-[437px]"
+           className="w-[200px] h-[200px] sm:w-[400px] sm:h-[400px]"
         />
       </div>
       <div className="flex flex-col justify-center items-center">

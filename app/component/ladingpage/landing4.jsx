@@ -25,7 +25,7 @@ function Landing4({onBack2}) {
     router.push('https://forms.gle/YV2x4YDYX14PV7qZ8')
   }
   return (
-    <div className="flex flex-col-reverse gap-x-[150px] sm:flex-row justify-center h-screen items-center flex-shrink-1">
+    <div className="flex flex-col-reverse gap-x-[150px] sm:flex-row justify-center flex-shrink-1 items-center  sm:gap-[120px] gap-[45px]">
       <div className="flex flex-col gap-[35px] sm:items-start items-center">
         <div>
           <h2 className="text-center sm:text-start max-w-[400px] my-[5px] sm:my-[10px] font-kanit font-medium text-[1.25rem] sm:text-[1.8rem]">
@@ -56,8 +56,8 @@ function Landing4({onBack2}) {
         className="w-[200px] h-[200px] sm:w-[382px] sm:h-[382px]"
         right="50000"
         src="/image/6370cd8e80c2d2d95ea0f949f_082-min 2.png"
-        width={1500}
-        height={1500}
+        width={900}
+        height={900}
         quality={100}
         alt="sadWithCat"
       ></Image>

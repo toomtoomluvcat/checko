@@ -14,10 +14,17 @@
   }
 }
 
+/* globals.css */
+
 body {
-  font-family: "Kanit", sans-serif;
+  font-family: 'Noto Sans Thai Looped', 'Biryani', 'Charm', 'Kanit', sans-serif;
 }
 
-h1, h2, h3 {
-  font-family: "Biryani", sans-serif;
+.font-kanit {
+  font-family: 'Kanit', sans-serif;
 }
+
+.font-noto-sans-thai-looped {
+  font-family: 'Noto Sans Thai Looped', sans-serif;
+}
+

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function Landing2({onClick1,onBack}) {
   return (
-    <div className="flex gap-y-[60px] gap-x-[150px] flex-col sm:flex-row-reverse justify-center h-screen items-center">
+    <div className="flex gap-y-[60px] gap-x-[150px] flex-col sm:flex-row-reverse justify-center items-center ">
       <div className="flex flex-col sm:items-start items-center">
         <h2 className="my-[10px] font-kanit font-medium text-[1.3rem] sm:text-[1.8rem]">
           1. ประเภทภาพที่ไม่ควรใช้
@@ -29,8 +29,8 @@ function Landing2({onClick1,onBack}) {
        *use rem instead px because of font are stertch*/}
       <Image className="w-[200px] h-[200px] sm:w-[382px] sm:h-[382px]"
         src="/image/670dcf9fc8133002fdd63b8b_055-min.png"
-        width={1500}
-        height={1500}
+        width={900}
+        height={900}
         quality={100}
         alt="sadWithCat"
       ></Image>
