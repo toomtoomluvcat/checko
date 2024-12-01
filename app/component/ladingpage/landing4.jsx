@@ -40,9 +40,7 @@ function Landing4({onBack2}) {
           </button>
           <button 
           onClick={handlesubmit} 
-          className={`transition-all px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px] ${
-            canClick ? "bg-black text-white hover:bg-[#292929]" : "bg-gray-200 text-white cursor-not-allowed"
-          }`} 
+          className="bg-black text-white  hover:bg-[#292929] transition-all px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]"
           disabled = {!canClick}
           >
           
