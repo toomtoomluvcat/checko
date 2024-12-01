@@ -48,7 +48,7 @@ function Landing4({onBack2}) {
           disabled = {!canClick}
           >
           
-            {canClick ? "ขั้นตอนถัดไป" : `รออีก ${cooldown} วินาที`}
+            {canClick ? "เริ่มกันเลย !" : `รออีก ${cooldown} วินาที`}
           </button>
         </div>
       </div>
