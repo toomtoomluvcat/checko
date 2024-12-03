@@ -44,7 +44,7 @@ function Landing4({onBack2}) {
           </button>
           <button 
           onClick={handlesubmit} 
-          className="bg-black text-white  hover:bg-[#292929] transition-all px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]"
+          className={canClick? "bg-black text-white  hover:bg-[#292929] transition-all px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]":"bg-[#434343] text-white  hover:bg-[#292929] transition-all px-[25px] sm:px-[40px] py-[5.5px] sm:py-[7px] rounded-[9px] sm:rounded-[12px]"}
           disabled = {!canClick}
           >
           

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 function Landing1({onClick}) {
   return (
-    <div className="flex flex-col sm:gap-[120px] gap-[45px] sm:flex-row  justify-center items-center  ">
+    <div className="flex flex-col sm:flex-row sm:gap-[120px] gap-[45px]   justify-center items-center  ">
       <div className="relative right-[0px] xl:right-[50px]">
         <Image
           src="/image/Untitled-2.png"
