@@ -229,11 +229,12 @@ function Form() {
       setstatus("Image doesn't contain any formation data, try another image.");
       return;
     }
-    const value = studentId.replace("-", "");
-    if (studentdict[value]) {
-      setstudentname(studentdict[value].name);
-    } else {
+    
+    if (!studentId || !studentdict[studentId.replace("-", "")]) {
       setstudentname("dont match any student id");
+      return
+    } else {
+      setstudentname(studentdict[studentId.replace("-", "")].name);
     }
     try {
       const timeStamp = DateTime.now()
@@ -245,7 +246,7 @@ function Form() {
         ];
       const body = {
         datum: {
-          name: `${studentdict[value].name}`,
+          name: `${studentdict[studentId.replace("-", "")].name}`,
           datestamp: timeStamp,
           date: exifData.date,
           time: exifData.time,
@@ -257,7 +258,7 @@ function Form() {
             1,
             JSON.stringify(exifData.longtitude).length - 1
           ),
-          row: `${studentdict[value].row}`,
+          row: `${studentdict[studentId.replace("-", "")].row}`,
           colum: RowFormDate ? RowFormDate : 0,
         },
       };
