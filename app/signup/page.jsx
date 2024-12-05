@@ -1,25 +1,61 @@
-"use client"
+"use client";
 
-import React from 'react';
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 function SignupPage() {
+  const [username, setusername] = useState();
+  const [password, setpassword] = useState();
+  const [confirmpassword, setconfirmpassword] = useState();
+  const [error, seterror] = useState();
+  const router = useRouter();
+
+  const handlesubmit = async (e) => {
+    e.preventDefault();
+
+    if (!username || !password || !confirmpassword) {
+      seterror("Full fill your information");
+      return;
+    }
+
+    if (confirmpassword != password) {
+      seterror("Pass word don't match");
+      return;
+    }
+    try {
+      const res = await fetch("http://localhost:3000/api/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      if (res.ok) {
+        router.push("/coeadmin");
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   return (
-    
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 font-kanit">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-2xl font-semibold text-center mb-6 text-gray-800">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500 font-kanit">
+      <div className="w-full max-w-lg bg-white p-8 rounded-xl shadow-2xl">
+        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
           สมัครสมาชิก
         </h1>
-        <form>
+        {error && <div className="text-center text-red-500 mb-4">{error}</div>}
+        <form onSubmit={handlesubmit} className="space-y-6">
           {/* ชื่อผู้ใช้ */}
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="username"
-              className="block text-gray-700 font-medium mb-2"
+              className="block text-sm font-medium text-gray-700"
             >
-              ชื่อผู้ใช้
+              ผู้ใช้งาน
             </label>
             <input
+              onChange={(e) => setusername(e.target.value)}
               type="text"
               id="username"
               placeholder="กรอกชื่อผู้ใช้"
@@ -28,14 +64,15 @@ function SignupPage() {
           </div>
 
           {/* รหัสผ่าน */}
-          <div className="mb-6">
+          <div>
             <label
               htmlFor="password"
-              className="block text-gray-700 font-medium mb-2"
+              className="block text-sm font-medium text-gray-700"
             >
               รหัสผ่าน
             </label>
             <input
+              onChange={(e) => setpassword(e.target.value)}
               type="password"
               id="password"
               placeholder="กรอกรหัสผ่าน"
@@ -43,14 +80,16 @@ function SignupPage() {
             />
           </div>
 
-          <div className="mb-6">
+          {/* ยืนยันรหัสผ่าน */}
+          <div>
             <label
-              htmlFor="confirmpasswordpassword"
-              className="block text-gray-700 font-medium mb-2"
+              htmlFor="confirmpassword"
+              className="block text-sm font-medium text-gray-700"
             >
               ยืนยันรหัสผ่าน
             </label>
             <input
+              onChange={(e) => setconfirmpassword(e.target.value)}
               type="password"
               id="confirmpassword"
               placeholder="ยืนยันรหัสผ่าน"
@@ -61,17 +100,17 @@ function SignupPage() {
           {/* ปุ่มสมัคร */}
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
           >
             สมัครสมาชิก
           </button>
         </form>
 
         <p className="mt-4 text-center text-gray-600">
-          มีบัญชีอยู่แล้ว?{' '}
-          <a href="/login" className="text-blue-500 hover:underline">
+          มีบัญชีอยู่แล้ว?{" "}
+          <Link href="/coeadmin" className="text-blue-500 hover:underline">
             เข้าสู่ระบบ
-          </a>
+          </Link>
         </p>
       </div>
     </div>

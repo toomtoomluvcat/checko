@@ -11,6 +11,7 @@ module.exports = {
         kanit: ["Kanit", "sans-serif"],
         biryani: ["Biryani", "sans-serif"],
         notoSansThaiLooped: ["Noto Sans Thai Looped", "sans-serif"],
+        
       },
     },
   },

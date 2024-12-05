@@ -16,15 +16,11 @@
 
 /* globals.css */
 
+/* ใช้ฟอนต์ Noto Sans Thai Looped */
 body {
-  font-family: 'Noto Sans Thai Looped', 'Biryani', 'Charm', 'Kanit', sans-serif;
-}
-
-.font-kanit {
-  font-family: 'Kanit', sans-serif;
-}
-
-.font-noto-sans-thai-looped {
   font-family: 'Noto Sans Thai Looped', sans-serif;
 }
+
+
+
 
