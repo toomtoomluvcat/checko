@@ -22,7 +22,7 @@ function Landing4({onBack2}) {
 
   const handlesubmit = (e)=>{
     e.preventDefault();
-    router.push('https://forms.gle/YV2x4YDYX14PV7qZ8')
+    router.push('/form')
   }
   return (
     <div className="flex flex-col-reverse gap-x-[150px] sm:flex-row justify-center flex-shrink-1 items-center  sm:gap-[120px] gap-[45px]">

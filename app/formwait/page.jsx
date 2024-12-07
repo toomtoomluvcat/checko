@@ -3,20 +3,14 @@
 import React, { useState } from "react";
 import EXIF from "exif-js";
 import { DateTime } from "luxon";
-import Nav from "../component/nav";
-import NextImage from "next/image";
-import Catspin from "../component/formsubmit/catspin";
-import Link from "next/link";
 
 function Form() {
   const [exifData, setExifData] = useState();
   const [imageSrc, setImageSrc] = useState();
   const [status, setstatus] = useState("");
   const [studentname, setstudentname] = useState();
-  const [answer, setanswer] = useState();
   const [date, setDate] = useState();
   const [studentId, setStudentId] = useState();
-  const [popup, setpopup] = useState();
 
   const classDate = {
     "26/11": 6,
@@ -235,52 +229,35 @@ function Form() {
       setstatus("Image doesn't contain any formation data, try another image.");
       return;
     }
-
+    
     if (!studentId || !studentdict[studentId.replace("-", "")]) {
-      setstatus("dont match any student id");
-      return;
+      setstudentname("dont match any student id");
+      return
     } else {
       setstudentname(studentdict[studentId.replace("-", "")].name);
     }
-
     try {
-      setpopup("catspin");
       const timeStamp = DateTime.now()
         .setZone("Asia/Bangkok")
         .toFormat("yyyy:LL:dd");
-      let RowFormDate =
+      const RowFormDate =
         classDate[
           `${exifData.date.substring(8)}/${exifData.date.substring(5, 7)}`
         ];
-
-      const hour = parseInt(exifData.time.substring(0, 2));
-      const minute = parseInt(exifData.time.substring(3, 5));
-      if (
-        !(
-          (hour > 9 || (hour === 9 && minute >= 0)) &&
-          (hour < 10 || (hour === 10 && minute <= 30))
-        )
-      ) {
-        RowFormDate = "0";
-      }
       const body = {
         datum: {
           name: `${studentdict[studentId.replace("-", "")].name}`,
           datestamp: timeStamp,
           date: exifData.date,
           time: exifData.time,
-          latitude: exifData.latitude
-            ? JSON.stringify(exifData.latitude).substring(
-                1,
-                JSON.stringify(exifData.latitude).length - 1
-              )
-            : "-",
-          longtitude: exifData.longtitude
-            ? JSON.stringify(exifData.longtitude).substring(
-                1,
-                JSON.stringify(exifData.longtitude).length - 1
-              )
-            : "-",
+          latitude: JSON.stringify(exifData.latitude).substring(
+            1,
+            JSON.stringify(exifData.latitude).length - 1
+          ),
+          longtitude: JSON.stringify(exifData.longtitude).substring(
+            1,
+            JSON.stringify(exifData.longtitude).length - 1
+          ),
           row: `${studentdict[studentId.replace("-", "")].row}`,
           colum: RowFormDate ? RowFormDate : 0,
         },
@@ -298,13 +275,10 @@ function Form() {
       );
       if (res.ok) {
         setstudentname(`บันทึกสำเร็จ`);
+        setstatus(timeStamp);
       }
     } catch (error) {
       console.log("error", error);
-    } finally {
-      setTimeout(() => {
-        setpopup("finishsave");
-      }, 2000);
     }
   };
 
@@ -333,99 +307,76 @@ function Form() {
         };
       };
       reader.readAsDataURL(file);
+      setImageSrc(URL.createObjectURL(file));
     }
   };
 
   return (
-    <div className="flex flex-col">
-      <NextImage
-        className="w-[100px] sm:top-[70px] sm:left-[100px] top-[25px] left-[30px] absolute"
-        width={650}
-        height={260}
-        alt="logo"
-        quality={100}
-        src="/image/checko_form_image/Group 64.png"
-      ></NextImage>
-      <div className="flex items-center justify-center md:gap-x-[0px] xl:gap-x-[70px] mx-auto w-screen h-screen absolute">
-        <div>
-          <div className="flex flex-col items-center">
-            <div className="text-center"></div>
-            <h2 className="text-center mb-[10px] text-[22px] font-medium">
-              กรอกข้อมูลเช็คชื่อ
-            </h2>
-            <h4 className="text-center">กรอกข้อมูลให้ครบถ้วนตามเงื่อนไข</h4>
-            <hr className="mt-[15px] sm:mt-[20px] w-[200px] sm:w-[350px] border-[1px] bg-black"></hr>
-          </div>
-          <form className="mt-[20px]" onSubmit={handlesubmit}>
-            <div className="flex flex-col gap-y-[10px]">
-              <label className="font-medium text-[16px]">
-                <span>รหัสนักศึกษา</span>
-                <span className="text-red-400">*</span>
-              </label>
-              <input
-                placeholder="กรอกรหัสนักศึกษาที่นี่"
-                onChange={(e) => setStudentId(e.target.value)}
-                className="border-[2px] rounded-[15px] py-[7px] px-[15px]"
-                type="text"
-              ></input>
-              <div className="flex flex-col gap-y-[10px]">
-                <label className="font-medium mt-[10px] text-[16px]">
-                  <span>คำตอบ</span>
-                  <span className="text-red-400">*</span>
-                </label>
-                <input
-                  onChange={(e) => setanswer(e.target.value)}
-                  placeholder="กรอกคำตอบที่นี่"
-                  className="border-[2px] rounded-[15px] py-[7px] px-[15px]"
-                  type="text"
-                ></input>
-              </div>
-              <div className="flex flex-col gap-y-[10px]">
-                <label className="font-medium mt-[10px] text-[16px]">
-                  <span>รูปภาพ</span>
-                  <span className="text-red-400">*</span>
-                </label>
-                <input
-                  placeholder="กรอกคำตอบที่นี่"
-                  className="file:rounded-[15px] file:px-[25px] file:py-[9px] file:text-white  file:mr-[18px] file:bg-[#A8A2A2] file:border-none"
-                  type="file"
-                  id="fileinput"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                ></input>
-              </div>
-            </div>
+    <div className="p-8 max-w-md mx-auto bg-gradient-to-r from-blue-50 to-white rounded-xl shadow-lg">
+      <form onSubmit={handlesubmit} className="space-y-8">
+        <h2 className="text-3xl font-bold text-blue-700 text-center">
+          อัปโหลดข้อมูลนักศึกษา
+        </h2>
 
-            <button
-              type="submit"
-              className="flex justify-center px-[130px] my-[15px] text-white bg-black hover:bg-[#202020] hover:text-[#e4e4e4] rounded-[25px] border-[3px] border-[#7e7e7e ] py-[12px]"
-            >
-              บันทึกข้อมูล
-            </button>
-            <div className="flex gap-x-[7px] text-[15px] ml-[10px] absolute">
-              <span className="text-[#5C5C5C]">
-                คุณยังไม่รู้วิธีการใช้งานแบบฟอร์ม?
-              </span>
-              <span className="font-medium text-black hover:text-[#404040] transition-all duration-300 ease-in-out"><Link href='/howToUse'>วิธีการใช้งาน</Link></span>
-            </div>
-            {status && (
-              <div className="font-light text-[15px] text-red-400 mt-[25px] ml-[10px] absolute">
-                {status}
-              </div>
-            )}
-          </form>
+        <div className="space-y-4">
+          <div className="flex flex-col">
+            <label className="text-gray-700 font-medium mb-1">
+              รหัสนักศึกษา
+            </label>
+            <input
+              onChange={(e) => setStudentId(e.target.value)}
+              className="border border-gray-300 rounded-lg py-3 px-4 focus:ring-2 focus:ring-blue-500 outline-none shadow-sm"
+              type="text"
+              placeholder="กรอกรหัสนักศึกษา"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className="text-gray-700 font-medium mb-1">กรอกรูปภาพ</label>
+            <input
+              type="file"
+              id="fileinput"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="file:py-2 file:px-4 file:rounded-lg file:border-none file:bg-blue-100 file:text-blue-600 hover:file:bg-blue-200"
+            />
+          </div>
         </div>
 
-        <NextImage
-          src="/image/checko_form_image/checko_form.png"
-          width={1500}
-          height={1500}
-          alt="forimage"
-          className="w-[650px] hidden md:block"
-        ></NextImage>
-      </div>
-      <Nav></Nav>
-      {popup === "catspin" ? <Catspin></Catspin> : <></>}
+        <button
+          className="w-full py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400"
+          type="submit"
+        >
+          กดส่งภาพ
+        </button>
+
+        {studentname && (
+          <div className="mt-4 text-green-600 font-medium text-center">
+            {studentname}
+          </div>
+        )}
+
+        {status && (
+          <div className="mt-2 text-red-500 font-medium text-center">
+            {status}
+          </div>
+        )}
+      </form>
+
+      {imageSrc && (
+        <div className="mt-8">
+          <h3 className="text-center text-blue-600 font-semibold mb-4">
+            ตัวอย่างรูปภาพที่เลือก
+          </h3>
+          <div className="flex justify-center">
+            <img
+              src={imageSrc}
+              alt="Selected"
+              className="w-64 rounded-lg shadow-md border border-gray-300"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

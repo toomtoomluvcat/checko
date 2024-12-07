@@ -18,9 +18,7 @@
 
 /* ใช้ฟอนต์ Noto Sans Thai Looped */
 body {
-  font-family: 'Noto Sans Thai Looped', sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'kanit', sans-serif;
 }
-
-
-
-

@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import Catspin from "./component/formsubmit/catspin";
+import Nav from "./component/nav";
 {
   /* หน้าแรก 
   
@@ -14,14 +16,8 @@ import Link from "next/link";
 }
 function Page() {
   return (
-    <div className="flex items-center h-screen justify-center">
-      <Link
-        href="form"
-        className="mw-[20px] bg-red-400 mw-[150px] rounded-[7px] px-[10px] py-[3px] font-notoSansThaiLooped"
-      >
-        แบบฟอร์ม
-      </Link>
-      
+    <div className="">
+      <Nav></Nav>
     </div>
   );
 }
