@@ -14,7 +14,7 @@ function Catspin() {
         </div>
         <Image
           className="sm:w-[200px] w-[120px] sm:my-[50px] my-[30px] animate-spin-360 "
-          src="/image/checko_form_image/670cd3fe2cbb453c66bb2130_112-min 2.png"
+          src="/image/checko_form_image/670cd3fe2cbb453c66bb2130_112-min 4.png"
           alt="blackcatspin"
           quality={100}
           width={200}

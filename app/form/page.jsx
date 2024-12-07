@@ -252,7 +252,9 @@ function Form() {
         classDate[
           `${exifData.date.substring(8)}/${exifData.date.substring(5, 7)}`
         ];
-
+      if(timeStamp !== exifData.date){
+        RowFormDate ="0";
+      }
       const hour = parseInt(exifData.time.substring(0, 2));
       const minute = parseInt(exifData.time.substring(3, 5));
       if (
