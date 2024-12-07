@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import Catspin from "./component/formsubmit/catspin";
 import Nav from "./component/nav";
+
 {
   /* หน้าแรก 
   
@@ -18,6 +18,7 @@ function Page() {
   return (
     <div className="">
       <Nav></Nav>
+      <Link className="flex mx-auto justify-center bg-red-400 w-[400px]" href='/form'>form</Link>
     </div>
   );
 }

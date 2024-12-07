@@ -7,10 +7,12 @@ import Nav from "../component/nav";
 import NextImage from "next/image";
 import Catspin from "../component/formsubmit/catspin";
 import Link from "next/link";
+import Finishsave from "../component/formsubmit/finishsave";
+import Notmatch from "../component/formsubmit/notmatch";
+import Confirmsubmit from "../component/formsubmit/confirmsubmit";
 
 function Form() {
   const [exifData, setExifData] = useState();
-  const [imageSrc, setImageSrc] = useState();
   const [status, setstatus] = useState("");
   const [studentname, setstudentname] = useState();
   const [answer, setanswer] = useState();
@@ -232,19 +234,53 @@ function Form() {
       return;
     }
     if (!date) {
-      setstatus("Image doesn't contain any formation data, try another image.");
+      setpopup('loading')
+      setTimeout(() => {
+        setpopup('notmatch')
+      }, 3000);
+      setti
       return;
     }
-
     if (!studentId || !studentdict[studentId.replace("-", "")]) {
       setstatus("dont match any student id");
       return;
     } else {
       setstudentname(studentdict[studentId.replace("-", "")].name);
     }
+    setpopup('confirm')
+  };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = function () {
+          EXIF.getData(img, function () {
+            const allTags = EXIF.getAllTags(this);
+            const dateTime = allTags.DateTime;
+            let date, time;
+            if (dateTime) {
+              const [datepart, timepart] = dateTime.split(" ");
+              date = datepart;
+              time = timepart;
+            }
+            const latitude = allTags.GPSLatitude;
+            const longtitude = allTags.GPSLongitude;
+            setDate(date);
+            setExifData({ date, time, latitude, longtitude });
+          });
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  
+  const onPopup =async()=>{
     try {
-      setpopup("catspin");
+      setpopup("loading");
       const timeStamp = DateTime.now()
         .setZone("Asia/Bangkok")
         .toFormat("yyyy:LL:dd");
@@ -285,6 +321,7 @@ function Form() {
             : "-",
           row: `${studentdict[studentId.replace("-", "")].row}`,
           colum: RowFormDate ? RowFormDate : 0,
+          answer:answer,
         },
       };
 
@@ -299,7 +336,7 @@ function Form() {
         }
       );
       if (res.ok) {
-        setstudentname(`บันทึกสำเร็จ`);
+        setstudentname(`${studentdict[studentId.replace("-", "")].name}`);
       }
     } catch (error) {
       console.log("error", error);
@@ -308,35 +345,7 @@ function Form() {
         setpopup("finishsave");
       }, 2000);
     }
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const img = new Image();
-        img.src = event.target.result;
-        img.onload = function () {
-          EXIF.getData(img, function () {
-            const allTags = EXIF.getAllTags(this);
-            const dateTime = allTags.DateTime;
-            let date, time;
-            if (dateTime) {
-              const [datepart, timepart] = dateTime.split(" ");
-              date = datepart;
-              time = timepart;
-            }
-            const latitude = allTags.GPSLatitude;
-            const longtitude = allTags.GPSLongitude;
-            setDate(date);
-            setExifData({ date, time, latitude, longtitude });
-          });
-        };
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  }
 
   return (
     <div className="flex flex-col">
@@ -427,7 +436,11 @@ function Form() {
         ></NextImage>
       </div>
       <Nav></Nav>
-      {popup === "catspin" ? <Catspin></Catspin> : <></>}
+      {popup === "loading" && ( <Catspin></Catspin>)}
+      {popup === "finishsave" && (<Finishsave studentName={studentname}></Finishsave>)}
+      {popup === "confirm" && (<Confirmsubmit onPopup={onPopup}  onClick={()=>setpopup("")} studentName={studentname}></Confirmsubmit>)}
+      {popup === "notmatch" && (<Notmatch onClick={()=>setpopup("")}></Notmatch>)}
+      
     </div>
   );
 }
