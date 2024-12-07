@@ -15,7 +15,19 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "kanit", sans-serif;
+}
+@layer utilities {
+  .shadow-inner-custom {
+    box-shadow: 2px -11px 99px -61px rgba(255, 255, 255, 0.61) inset;
+    -webkit-box-shadow: 2px -11px 99px -61px rgba(255, 255, 255, 0.61) inset;
+    -moz-box-shadow: 2px -11px 99px -61px rgba(255, 255, 255, 0.61) inset;
+  }
+  .shadow-inner-custom2 {
+    box-shadow: 2px -41px 99px -61px rgba(19, 19, 19, 0.61) inset;
+    -webkit-box-shadow: 2px -41px 99px -61px rgba(19, 19, 19, 0.61) inset;
+    -moz-box-shadow: 2px -41px 99px -61px rgba(19, 19, 19, 0.61) inset;
+  }
 }
