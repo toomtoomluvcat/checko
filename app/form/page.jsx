@@ -233,21 +233,14 @@ function Form() {
       setstatus("Input your image before submit");
       return;
     }
-    if (!date) {
-      setpopup('loading')
-      setTimeout(() => {
-        setpopup('notmatch')
-      }, 3000);
-      setti
-      return;
-    }
+
     if (!studentId || !studentdict[studentId.replace("-", "")]) {
       setstatus("dont match any student id");
       return;
     } else {
       setstudentname(studentdict[studentId.replace("-", "")].name);
     }
-    setpopup('confirm')
+    setpopup("confirm");
   };
 
   const handleFileChange = (e) => {
@@ -277,8 +270,8 @@ function Form() {
       reader.readAsDataURL(file);
     }
   };
-  
-  const onPopup =async()=>{
+
+  const onPopup = async () => {
     try {
       setpopup("loading");
       const timeStamp = DateTime.now()
@@ -288,8 +281,8 @@ function Form() {
         classDate[
           `${exifData.date.substring(8)}/${exifData.date.substring(5, 7)}`
         ];
-      if(timeStamp !== exifData.date){
-        RowFormDate ="0";
+      if (timeStamp !== exifData.date) {
+        RowFormDate = "0";
       }
       const hour = parseInt(exifData.time.substring(0, 2));
       const minute = parseInt(exifData.time.substring(3, 5));
@@ -321,7 +314,7 @@ function Form() {
             : "-",
           row: `${studentdict[studentId.replace("-", "")].row}`,
           colum: RowFormDate ? RowFormDate : 0,
-          answer:answer,
+          answer: answer,
         },
       };
 
@@ -341,11 +334,18 @@ function Form() {
     } catch (error) {
       console.log("error", error);
     } finally {
-      setTimeout(() => {
-        setpopup("finishsave");
-      }, 2000);
+      if (!date) {
+        setTimeout(() => {
+          setpopup("notmatch");
+        }, 3500);
+        return;
+      } else {
+        setTimeout(() => {
+          setpopup("finishsave");
+        }, 2000);
+      }
     }
-  }
+  };
 
   return (
     <div className="flex flex-col">
@@ -417,7 +417,9 @@ function Form() {
               <span className="text-[#5C5C5C]">
                 คุณยังไม่รู้วิธีการใช้งานแบบฟอร์ม?
               </span>
-              <span className="font-medium text-black hover:text-[#404040] transition-all duration-300 ease-in-out"><Link href='/howToUse'>วิธีการใช้งาน</Link></span>
+              <span className="font-medium text-black hover:text-[#404040] transition-all duration-300 ease-in-out">
+                <Link href="/howToUse">วิธีการใช้งาน</Link>
+              </span>
             </div>
             {status && (
               <div className="font-light text-[15px] text-red-400 mt-[25px] ml-[10px] absolute">
@@ -436,11 +438,20 @@ function Form() {
         ></NextImage>
       </div>
       <Nav></Nav>
-      {popup === "loading" && ( <Catspin></Catspin>)}
-      {popup === "finishsave" && (<Finishsave studentName={studentname}></Finishsave>)}
-      {popup === "confirm" && (<Confirmsubmit onPopup={onPopup}  onClick={()=>setpopup("")} studentName={studentname}></Confirmsubmit>)}
-      {popup === "notmatch" && (<Notmatch onClick={()=>setpopup("")}></Notmatch>)}
-      
+      {popup === "loading" && <Catspin></Catspin>}
+      {popup === "finishsave" && (
+        <Finishsave studentName={studentname}></Finishsave>
+      )}
+      {popup === "confirm" && (
+        <Confirmsubmit
+          onPopup={onPopup}
+          onClick={() => setpopup("")}
+          studentName={studentname}
+        ></Confirmsubmit>
+      )}
+      {popup === "notmatch" && (
+        <Notmatch onClick={() => setpopup("")}></Notmatch>
+      )}
     </div>
   );
 }

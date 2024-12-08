@@ -13,12 +13,12 @@ function Catspin() {
           </p>
         </div>
         <Image
-          className="sm:w-[200px] w-[120px] sm:my-[50px] my-[30px] animate-spin-360 "
+          className="sm:w-[200px] w-[150px] sm:my-[50px] my-[30px] animate-spin-360 "
           src="/image/checko_form_image/670cd3fe2cbb453c66bb2130_112-min 4.png"
           alt="blackcatspin"
           quality={100}
           width={200}
-          height={400}
+          height={200}
         />
         <p className="font-kanit text-[#5B5B5B] text-center">มุเงี๊ยวววววว~</p>
       </div>

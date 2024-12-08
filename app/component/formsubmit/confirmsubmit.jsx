@@ -10,8 +10,8 @@ function Confirmsubmit({ onPopup, onClick, studentName }) {
           <Image
            
             src="/image/checko_form_image/670dd09b0ae166e32b77cb84_039-min.png"
-            width={300}
-            height={300}
+            width={200}
+            height={200}
             alt="catinbag"
           ></Image>
           <p className="text-[10px] sm:text-[14px] text-center translate-y-[-15px] py-[7px] rounded-[10px] bg-[#E8E8E8]">{studentName}</p>

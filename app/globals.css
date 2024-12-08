@@ -14,13 +14,12 @@
   }
 }
 
-/* globals.css */
-
-/* ใช้ฟอนต์ Noto Sans Thai Looped */
 body {
+  font-family: 'kanit';
   margin: 0;
   box-sizing: border-box;
   font-family: "kanit", sans-serif;
+  background-color: white;
 }
 @layer utilities {
   .shadow-inner-custom {

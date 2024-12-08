@@ -8,8 +8,8 @@ function Notmatch({onClick}) {
         <div className="relative bottom-[25px]">
           <Image
             src="/image/checko_form_image/Screenshot 2023-09-07 235126.png"
-            width={300}
-            height={300}
+            width={250}
+            height={250}
             alt="poorcat"
             className='w-[180px] h-[180px]'
           ></Image>
