@@ -33,14 +33,14 @@ function Page() {
         <div className="flex flex-grow flex-col sm:flex-row-reverse items-center justify-center space-y-4 sm:space-y-0 sm:gap-[25px] mt-[35px] sm:mt-[0px]">
           <Link
             href={"/form"}
-            className="bg-black text-white  hover:bg-[#292929] transition-all px-[70px] sm:px-[40px] py-[8px] sm:py-[12px] rounded-[9px] sm:rounded-[12px]"
+            className="bg-black text-white  hover:bg-[#292929] transition-all px-[70px] sm:px-[40px] py-[10px] sm:py-[12px] rounded-[11px] sm:rounded-[12px]"
           >
             เช็คชื่อเข้าเรียน
           </Link>
 
           <Link
             href={"/howToUse"}
-            className="bg-[#D9D9D9] border-[1px] sm:border-[2px] hover:text-[#292929] hover:border-[#292929] border-black px-[75px] sm:px-[40px] py-[8px] sm:py-[12px] rounded-[9px] sm:rounded-[12px]"
+            className="bg-[#D9D9D9] border-[3px] sm:border-[3px] hover:text-[#292929] hover:border-[#292929] border-black px-[75px] sm:px-[40px] py-[10px] sm:py-[12px] rounded-[11px] sm:rounded-[12px]"
           >
             วิธีการใช้งาน
           </Link>
