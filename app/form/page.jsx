@@ -229,12 +229,16 @@ function Form() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     const file = document.getElementById("fileinput").files[0];
+    if (!answer || !studentId){
+      setstatus("please provide complete information")
+      return;
+    }
     if (!file) {
       setstatus("Input your image before submit");
       return;
     }
 
-    if (!studentId || !studentdict[studentId.replace("-", "")]) {
+    if ( !studentdict[studentId.replace("-", "")]) {
       setstatus("dont match any student id");
       return;
     } else {
