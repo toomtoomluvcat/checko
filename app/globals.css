@@ -33,3 +33,32 @@ body {
     -moz-box-shadow: 2px -41px 99px -61px rgba(19, 19, 19, 0.61) inset;
   }
 }
+@keyframes rgb-color {
+  0% {
+    color: red;
+  }
+  25% {
+    color: orange;
+  }
+  50% {
+    color: yellow;
+  }
+  75% {
+    color: green;
+  }
+  100% {
+    color: blue;
+  }
+}
+
+.rgb-hover {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.rgb-hover:hover {
+  animation: rgb-color 1s infinite linear;
+  transform: scale(1.05);
+}
