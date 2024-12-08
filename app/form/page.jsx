@@ -349,6 +349,7 @@ function Form() {
 
   return (
     <div className="flex flex-col">
+      <Nav></Nav>
       <NextImage
         className="w-[100px] sm:top-[70px] sm:left-[100px] top-[25px] left-[30px] absolute"
         width={650}
@@ -367,66 +368,70 @@ function Form() {
             <h4 className="text-center">กรอกข้อมูลให้ครบถ้วนตามเงื่อนไข</h4>
             <hr className="mt-[15px] sm:mt-[20px] w-[200px] sm:w-[350px] border-[1px] bg-black"></hr>
           </div>
-          <form className="mt-[20px]" onSubmit={handlesubmit}>
-            <div className="flex flex-col gap-y-[10px]">
-              <label className="font-medium text-[16px]">
-                <span>รหัสนักศึกษา</span>
-                <span className="text-red-400">*</span>
-              </label>
-              <input
-                placeholder="กรอกรหัสนักศึกษาที่นี่"
-                onChange={(e) => setStudentId(e.target.value)}
-                className="border-[2px] rounded-[15px] py-[7px] px-[15px]"
-                type="text"
-              ></input>
-              <div className="flex flex-col gap-y-[10px]">
-                <label className="font-medium mt-[10px] text-[16px]">
-                  <span>คำตอบ</span>
-                  <span className="text-red-400">*</span>
-                </label>
-                <input
-                  onChange={(e) => setanswer(e.target.value)}
-                  placeholder="กรอกคำตอบที่นี่"
-                  className="border-[2px] rounded-[15px] py-[7px] px-[15px]"
-                  type="text"
-                ></input>
-              </div>
-              <div className="flex flex-col gap-y-[10px]">
-                <label className="font-medium mt-[10px] text-[16px]">
-                  <span>รูปภาพ</span>
-                  <span className="text-red-400">*</span>
-                </label>
-                <input
-                  placeholder="กรอกคำตอบที่นี่"
-                  className="file:rounded-[15px] file:px-[25px] file:py-[9px] file:text-white  file:mr-[18px] file:bg-[#A8A2A2] file:border-none"
-                  type="file"
-                  id="fileinput"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                ></input>
-              </div>
-            </div>
+          <div>
+            <form className="mt-[20px]  mx-auto" onSubmit={handlesubmit}>
+              <div className="mx-auto w-[300px] sm:w-[350px]">
+                <div className="flex flex-col gap-y-[10px] ">
+                  <label className="font-medium text-[16px]">
+                    <span>รหัสนักศึกษา</span>
+                    <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    placeholder="กรอกรหัสนักศึกษาที่นี่"
+                    onChange={(e) => setStudentId(e.target.value)}
+                    className="border-[2px] rounded-[15px] py-[7px] px-[15px]"
+                    type="text"
+                  ></input>
+                  <div className="flex flex-col gap-y-[10px]">
+                    <label className="font-medium mt-[10px] text-[16px]">
+                      <span>คำตอบ</span>
+                      <span className="text-red-400">*</span>
+                    </label>
+                    <input
+                      onChange={(e) => setanswer(e.target.value)}
+                      placeholder="กรอกคำตอบที่นี่"
+                      className="border-[2px] rounded-[15px] py-[7px] px-[15px]"
+                      type="text"
+                    ></input>
+                  </div>
+                  <div className="flex flex-col gap-y-[10px]">
+                    <label className="font-medium mt-[10px] text-[16px]">
+                      <span>รูปภาพ</span>
+                      <span className="text-red-400">*</span>
+                    </label>
+                    <input
+                      placeholder="กรอกคำตอบที่นี่"
+                      className="file:rounded-[15px] file:px-[25px] file:py-[9px] file:text-white  file:mr-[18px] file:bg-[#A8A2A2] file:border-none"
+                      type="file"
+                      id="fileinput"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                    ></input>
+                  </div>
+                </div>
 
-            <button
-              type="submit"
-              className="flex justify-center px-[130px] my-[15px] text-white bg-black hover:bg-[#202020] hover:text-[#e4e4e4] rounded-[25px] border-[3px] border-[#7e7e7e ] py-[12px]"
-            >
-              บันทึกข้อมูล
-            </button>
-            <div className="flex gap-x-[7px] text-[15px] ml-[10px] absolute">
-              <span className="text-[#5C5C5C]">
-                คุณยังไม่รู้วิธีการใช้งานแบบฟอร์ม?
-              </span>
-              <span className="font-medium text-black hover:text-[#404040] transition-all duration-300 ease-in-out">
-                <Link href="/howToUse">วิธีการใช้งาน</Link>
-              </span>
-            </div>
-            {status && (
-              <div className="font-light text-[15px] text-red-400 mt-[25px] ml-[10px] absolute">
-                {status}
+                <button
+                  type="submit"
+                  className="flex mx-auto px-[108px] sm:px-[130px] my-[15px] text-white bg-black hover:bg-[#202020] hover:text-[#e4e4e4] rounded-[25px] border-[3px] border-[#7e7e7e ] py-[12px]"
+                >
+                  บันทึกข้อมูล
+                </button>
+                <div className="flex gap-x-[7px] text-[15px] ml-[10px] absolute">
+                  <span className="text-[#5C5C5C]">
+                    คุณยังไม่รู้วิธีการใช้งานแบบฟอร์ม?
+                  </span>
+                  <span className="font-medium text-black hover:text-[#404040] transition-all duration-300 ease-in-out">
+                    <Link href="/howToUse">วิธีการใช้งาน</Link>
+                  </span>
+                </div>
+                {status && (
+                  <div className="font-light text-[15px] text-red-400 mt-[25px] ml-[10px] absolute">
+                    {status}
+                  </div>
+                )}
               </div>
-            )}
-          </form>
+            </form>
+          </div>
         </div>
 
         <NextImage
@@ -437,7 +442,7 @@ function Form() {
           className="w-[650px] hidden md:block"
         ></NextImage>
       </div>
-      <Nav></Nav>
+
       {popup === "loading" && <Catspin></Catspin>}
       {popup === "finishsave" && (
         <Finishsave studentName={studentname}></Finishsave>

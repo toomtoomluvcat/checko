@@ -21,7 +21,7 @@ function Notmatch({onClick}) {
             ไม่สามารถโหลดข้อมูลได้
           </h1>
           <p className="sm:text-[19px] w-[70%] text-[14px] text-[#5B5B5B]">
-          ลองเปลี่ยนเป็นการถ่ายภาพจาก”แอปกล้องที่ไม่ใช่การถ่ายผ่านเว็บไซต์หรือภาพที่โหลดมาจากแหล่งที่อยู่อื่น
+          ลองเปลี่ยนเป็นการถ่ายภาพจาก -แอปกล้อง- ที่ไม่ใช่การถ่ายผ่านเว็บไซต์หรือภาพที่โหลดมาจากแหล่งที่อยู่อื่น
           </p>
           <button>
             <p onClick={onClick} className="bg-[#323232] mt-[30px] text-[17px] text-white px-[60px] py-[9px] sm:px-[100px] shadow-inner sm:py-[12px] rounded-[30px]">
