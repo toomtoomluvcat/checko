@@ -5,7 +5,7 @@ function Catspin() {
   return (
     <div className="fixed inset-0 m-auto">
       <div className="h-screen w-screen bg-black opacity-[30%]"></div>
-      <div className="max-w-[470px] bg-white h-[460px] sm:h-[550px] shadow-custom flex fiexd inset-0 left-[50px] right-[50px] m-auto rounded-[20px] flex-col items-center absolute justify-center">
+      <div className="max-w-[470px] bg-white h-[460px] sm:h-[550px] flex fiexd inset-0 left-[50px] right-[50px] m-auto rounded-[20px] flex-col items-center absolute justify-center">
         <div className="text-center font-kanit space-y-[10px]">
           <h1 className="font-medium text-[20px] sm:text-[25px]">กำลังบันทึกข้อมูล</h1>
           <p className="sm:text-[17px] text-[12px] text-[#5B5B5B]">

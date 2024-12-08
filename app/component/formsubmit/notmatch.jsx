@@ -4,7 +4,7 @@ function Notmatch({onClick}) {
   return (
     <div className="fixed inset-0 m-auto">
       <div className="h-screen w-screen bg-black opacity-[30%]"></div>
-      <div className="max-w-[470px] bg-white h-[460px] sm:h-[550px] shadow-custom flex fiexd inset-0 left-[50px] right-[50px] m-auto rounded-[20px] flex-col items-center absolute justify-center">
+      <div className="max-w-[470px] bg-white h-[460px] sm:h-[550px] flex fiexd inset-0 left-[50px] right-[50px] m-auto rounded-[20px] flex-col items-center absolute justify-center">
         <div className="relative bottom-[25px]">
           <Image
             src="/image/checko_form_image/Screenshot 2023-09-07 235126.png"
@@ -24,7 +24,7 @@ function Notmatch({onClick}) {
           ลองเปลี่ยนเป็นการถ่ายภาพจาก”แอปกล้องที่ไม่ใช่การถ่ายผ่านเว็บไซต์หรือภาพที่โหลดมาจากแหล่งที่อยู่อื่น
           </p>
           <button>
-            <p onClick={onClick} className="bg-[#323232] mt-[30px] text-[17px] shadow-inner-custom text-white px-[60px] py-[9px] sm:px-[100px] shadow-inner sm:py-[12px] rounded-[30px]">
+            <p onClick={onClick} className="bg-[#323232] mt-[30px] text-[17px] text-white px-[60px] py-[9px] sm:px-[100px] shadow-inner sm:py-[12px] rounded-[30px]">
               ลองอีกครั้ง
             </p>
           </button>

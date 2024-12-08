@@ -5,7 +5,7 @@ function Confirmsubmit({ onPopup, onClick, studentName }) {
   return (
     <div className="fixed inset-0 m-auto">
       <div className="h-screen w-screen bg-black opacity-[30%]"></div>
-      <div className="max-w-[470px] bg-white h-[460px] sm:h-[550px] shadow-custom flex fiexd inset-0 left-[50px] right-[50px] m-auto rounded-[20px] flex-col items-center absolute justify-center">
+      <div className="max-w-[470px] bg-white h-[460px] sm:h-[550px] flex fiexd inset-0 left-[50px] right-[50px] m-auto rounded-[20px] flex-col items-center absolute justify-center">
         <div className="relative w-[140px] h-[140px] sm:w-[170px] bottom-[50px] mb-[-50px] sm:mb-[-40px] sm:h-[170px]">
           <Image
            
@@ -26,12 +26,12 @@ function Confirmsubmit({ onPopup, onClick, studentName }) {
           ระบบจะบันทึกเวลา สถานที่ที่รูปถูกถ่าย การเข้ารหัสการแก้ไขรูปภาพ โปรดตรวจสอบรูปภาพก่อนส่งข้อมูล
           </p>
           <button onClick={onPopup}>
-            <p className="bg-[#323232] mt-[20px] sm:mt-[50px] text-[14px] sm:text-[17px] shadow-inner-custom text-white w-[170px] sm:w-[220px] shadow-inner py-[12px] rounded-[25px]">
+            <p className="bg-[#323232] mt-[20px] sm:mt-[50px] text-[14px] sm:text-[17px] text-white w-[170px] sm:w-[220px] shadow-inner py-[12px] rounded-[25px]">
               ยืนยันการส่ง
             </p>
           </button>
           <button onClick={onClick}>
-         <p className="bg-[#D9D9D9]  text-[14px] sm:text-[17px] shadow-inner-custom2 text-black shadow-inner w-[170px] sm:w-[220px] py-[10px] sm:py-[12px] rounded-[25px]">
+         <p className="bg-[#D9D9D9]  text-[14px] sm:text-[17px] text-black shadow-inner w-[170px] sm:w-[220px] py-[10px] sm:py-[12px] rounded-[25px]">
               ฉันยังไม่พร้อม
             </p>
           </button>

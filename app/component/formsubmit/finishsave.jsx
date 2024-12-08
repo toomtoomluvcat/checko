@@ -6,7 +6,7 @@ function Finishsave({ studentName }) {
   return (
     <div className="fixed inset-0 m-auto">
       <div className="h-screen w-screen bg-black opacity-[30%]"></div>
-      <div className="max-w-[470px] bg-white h-[460px] sm:h-[550px] shadow-custom flex fiexd inset-0 left-[50px] right-[50px] m-auto rounded-[20px] flex-col items-center absolute justify-center">
+      <div className="max-w-[470px] bg-white h-[460px] sm:h-[550px] flex fiexd inset-0 left-[50px] right-[50px] m-auto rounded-[20px] flex-col items-center absolute justify-center">
         <div className="relative">
           <Image
             src="/image/checko_form_image/670cd586577a0eeb27e89da4_105-min.png"
@@ -32,7 +32,7 @@ function Finishsave({ studentName }) {
             กดปุ่มด้านล่างเพื่อกลับไปยังหน้าแรก
           </p>
           <button>
-            <Link href='/'><p className="bg-[#323232] mt-[30px] text-[17px] shadow-inner-custom text-white px-[50px] shadow-inner py-[12px] rounded-[20px]">
+            <Link href='/'><p className="bg-[#323232] mt-[30px] text-[17px] text-white px-[50px] shadow-inner py-[12px] rounded-[20px]">
               กลับไปยังหน้าแรก
             </p></Link>
           </button>
