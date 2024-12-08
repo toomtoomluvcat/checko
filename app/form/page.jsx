@@ -362,7 +362,7 @@ function Form() {
         quality={100}
         src="/image/checko_form_image/Group 64.png"
       ></NextImage>
-      <div className="relative flex items-center justify-center md:gap-x-[0px] xl:gap-x-[70px] mx-auto w-screen absolute">
+      <div className="relative flex items-center justify-center mt-[5vh] sm:mt-0 md:gap-x-[0px] xl:gap-x-[70px] mx-auto w-screen absolute">
         <div>
           <div className=" relative z-0 flex flex-col items-center">
             <div className="text-center"></div>
