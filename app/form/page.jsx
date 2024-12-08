@@ -229,8 +229,8 @@ function Form() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     const file = document.getElementById("fileinput").files[0];
-    if (!answer || !studentId){
-      setstatus("please provide complete information")
+    if (!answer || !studentId) {
+      setstatus("please provide complete information");
       return;
     }
     if (!file) {
@@ -238,7 +238,7 @@ function Form() {
       return;
     }
 
-    if ( !studentdict[studentId.replace("-", "")]) {
+    if (!studentdict[studentId.replace("-", "")]) {
       setstatus("dont match any student id");
       return;
     } else {
@@ -353,7 +353,33 @@ function Form() {
 
   return (
     <div className="flex flex-col">
-      <Nav></Nav>
+        <nav className="relative bg-white z-index-40">
+          <ul className=" font-kanit font-medium my-[30px] flex justify-end relative right-[20px] md:justify-center gap-x-[7px] md:gap-x-[90px]">
+            <Link href="/">
+              <li className="hover:text-[#5a5a5a] transition-all duration-300 ease-in-out">
+                Home
+              </li>
+            </Link>
+            <Link href="/form">
+              <li className="hidden md:block hover:text-[#5a5a5a] transition-all duration-300 ease-in-out">
+                Form
+              </li>
+            </Link>
+            <Link href="/howToUse">
+              <li className="hidden md:block hover:text-[#5a5a5a] transition-all duration-300 ease-in-out">
+                How to use
+              </li>
+            </Link>
+            <Link
+              target="blank"
+              href="https://physics.sc.kku.ac.th/?page_id=727"
+            >
+              <li className="hover:text-[#5a5a5a] transition-all duration-300 ease-in-out">
+                Help & support
+              </li>
+            </Link>
+          </ul>
+        </nav>
       <NextImage
         className="w-[100px] sm:top-[70px] sm:left-[100px] top-[25px] left-[30px] absolute"
         width={650}
@@ -362,9 +388,9 @@ function Form() {
         quality={100}
         src="/image/checko_form_image/Group 64.png"
       ></NextImage>
-      <div className="flex items-center justify-center md:gap-x-[0px] xl:gap-x-[70px] mx-auto w-screen h-screen absolute">
+      <div className="relative flex items-center justify-center md:gap-x-[0px] xl:gap-x-[70px] mx-auto w-screen absolute">
         <div>
-          <div className="flex flex-col items-center">
+          <div className=" relative z-0 flex flex-col items-center">
             <div className="text-center"></div>
             <h2 className="text-center mb-[10px] text-[22px] font-medium">
               กรอกข้อมูลเช็คชื่อ
@@ -446,7 +472,6 @@ function Form() {
           className="w-[650px] hidden md:block"
         ></NextImage>
       </div>
-
       {popup === "loading" && <Catspin></Catspin>}
       {popup === "finishsave" && (
         <Finishsave studentName={studentname}></Finishsave>
