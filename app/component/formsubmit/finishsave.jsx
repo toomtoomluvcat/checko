@@ -14,9 +14,9 @@ function Finishsave({ studentName }) {
             height={250}
             alt="idol"
           ></Image>
-          <div className="absolute bottom-[30%] left-[25.5%] w-full h-full flex items-center justify-center">
+          <div className="absolute bottom-[22%] left-[25.5%] w-full h-full flex items-center justify-center">
           <p className="text-[10px] text-center font-medium">
-                ขอบคุณสำหรับฟอร์มนะ<br></br> {studentName}
+          {studentName} <br></br> ขอบคุณสำหรับฟอร์มนะ
               </p>
           </div>
         </div>
