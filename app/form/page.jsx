@@ -18,7 +18,7 @@ function Form() {
   const [answer, setanswer] = useState();
   const [date, setDate] = useState();
   const [studentId, setStudentId] = useState();
-  const [popup, setpopup] = useState("finishsave");
+  const [popup, setpopup] = useState();
 
   const classDate = {
     "26/11": 6,
