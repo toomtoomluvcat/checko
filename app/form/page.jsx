@@ -298,42 +298,39 @@ function Form() {
       ) {
         RowFormDate = "0";
       }
-      const body = {
-        datum: {
-          name: `${studentdict[studentId.replace("-", "")].name}`,
-          datestamp: timeStamp,
-          date: exifData.date,
-          time: exifData.time,
-          latitude: exifData.latitude
-            ? JSON.stringify(exifData.latitude).substring(
-                1,
-                JSON.stringify(exifData.latitude).length - 1
-              )
-            : "-",
-          longtitude: exifData.longtitude
-            ? JSON.stringify(exifData.longtitude).substring(
-                1,
-                JSON.stringify(exifData.longtitude).length - 1
-              )
-            : "-",
-          row: `${studentdict[studentId.replace("-", "")].row}`,
-          colum: RowFormDate ? RowFormDate : 0,
-          answer: answer,
-        },
+      const data = {
+        name: `${studentdict[studentId.replace("-", "")].name}`,
+        timeStamp: timeStamp,
+        date: exifData.date,
+        time: exifData.time,
+        latitude: exifData.latitude
+          ? JSON.stringify(exifData.latitude).substring(
+              1,
+              JSON.stringify(exifData.latitude).length - 1
+            )
+          : "-",
+        longitude: exifData.longtitude
+          ? JSON.stringify(exifData.longtitude).substring(
+              1,
+              JSON.stringify(exifData.longtitude).length - 1
+            )
+          : "-",
+        row: `${studentdict[studentId.replace("-", "")].row}`,
+        colum: RowFormDate ? RowFormDate : 0,
+        answer: answer,
       };
-
       const res = await fetch(
-        "https://api.sheety.co/198501d3d858aa8cff12db41f95a6a2c/physicAttendance/datum",
+        "https://script.google.com/macros/s/AKfycbxd9uv1QDwA_qvruFOQNmzGKwHpq27QfbJ5BPOStB8SF3TY54E-euiHUUVUl9YW1QE/exec",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
+          body: new URLSearchParams(data),
         }
       );
       if (res.ok) {
         setstudentname(`${studentdict[studentId.replace("-", "")].name}`);
+        setpopup("finishsave");
+      } else {
+        setstatus("Can't connect sever");
       }
     } catch (error) {
       console.log("error", error);
@@ -343,17 +340,13 @@ function Form() {
           setpopup("notmatch");
         }, 3500);
         return;
-      } else {
-        setTimeout(() => {
-          setpopup("finishsave");
-        }, 2000);
       }
     }
   };
 
   return (
     <div className="flex flex-col">
-        <Nav></Nav>
+      <Nav></Nav>
       <NextImage
         className="w-[100px] sm:top-[70px] sm:left-[100px] top-[25px] left-[30px] absolute"
         width={650}
