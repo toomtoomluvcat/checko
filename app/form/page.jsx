@@ -299,6 +299,7 @@ function Form() {
         RowFormDate = "0";
       }
       const data = {
+        studenid:studentId.replace("-", ""),
         name: `${studentdict[studentId.replace("-", "")].name}`,
         timeStamp: timeStamp,
         date: exifData.date,
@@ -320,7 +321,7 @@ function Form() {
         answer: answer,
       };
       const res = await fetch(
-        "https://script.google.com/macros/s/AKfycbxd9uv1QDwA_qvruFOQNmzGKwHpq27QfbJ5BPOStB8SF3TY54E-euiHUUVUl9YW1QE/exec",
+        "https://script.google.com/macros/s/AKfycbzyiaVVsp12U4BY6X2wH0Yp1I70YxA2duUHEcFVKj16CdMoagf59LmhpmLNGIKiL_s/exec",
         {
           method: "POST",
           body: new URLSearchParams(data),
