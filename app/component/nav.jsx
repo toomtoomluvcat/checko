@@ -9,7 +9,10 @@ function Nav() {
                 <Link href='/'><li className='hover:text-[#5a5a5a] transition-all duration-300 ease-in-out'>Home</li></Link>
                 <Link href='/form'><li className='hidden md:block hover:text-[#5a5a5a] transition-all duration-300 ease-in-out'>Form</li></Link>
                 <Link href='/howToUse'><li className='hidden md:block hover:text-[#5a5a5a] transition-all duration-300 ease-in-out'>How to use</li></Link>
-                <Link target='blank' href='https://docs.google.com/spreadsheets/d/1aOklifcp5SNvkdTZBSN-lIkj7ZpEEYpzRKiTcB9lnXg/edit?usp=sharing'><li className='hover:text-[#5a5a5a] transition-all duration-300 ease-in-out'>Submit history</li></Link>
+                <Link target='blank'
+                 href='https://docs.google.com/spreadsheets/d/1aOklifcp5SNvkdTZBSN-lIkj7ZpEEYpzRKiTcB9lnXg/edit?usp=sharing'
+                 ><li className='hover:text-[#5a5a5a] transition-all duration-300 ease-in-out'>Submit history</li>
+                 </Link>
             </ul>
         </nav>
     </div>

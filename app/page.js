@@ -1,7 +1,10 @@
-import React from "react";
+"use client"
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Nav from "./component/nav";
+import ShowError from "./component/showerror";
 {
   /* หน้าแรก 
   
@@ -15,6 +18,13 @@ import Nav from "./component/nav";
   */
 }
 function Page() {
+  const [popup,setPopup] =useState(0);
+  useEffect(()=>{
+    setPopup(0)
+  },[])
+  const handlePopup=()=>{
+    setPopup(1)
+  }
   return (
     <div className="">
       <Nav className="absolute inset-0"></Nav>
@@ -98,6 +108,7 @@ function Page() {
             </a>
           </p>
         </footer>
+        {popup==0? <ShowError onclick={handlePopup}></ShowError>:<div></div>}
       </div>
     </div>
   );

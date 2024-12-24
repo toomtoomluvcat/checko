@@ -226,7 +226,6 @@ function Form() {
     6730406762: { name: "นายพีรพัฒน์ วารินสะอาด", row: 164 },
   };
 
-
   const handlesubmit = async (e) => {
     e.preventDefault();
     const file = document.getElementById("fileinput").files[0];
@@ -300,7 +299,7 @@ function Form() {
         RowFormDate = "0";
       }
       const data = {
-        studenid:studentId.replace("-", ""),
+        studenid: studentId.replace("-", ""),
         name: `${studentdict[studentId.replace("-", "")].name}`,
         timeStamp: timeStamp,
         date: exifData.date,
@@ -310,44 +309,42 @@ function Form() {
               1,
               JSON.stringify(exifData.latitude).length - 1
             )
-          : "-",
+          : "0",
         longitude: exifData.longtitude
           ? JSON.stringify(exifData.longtitude).substring(
               1,
               JSON.stringify(exifData.longtitude).length - 1
             )
-          : "-",
+          : "0",
         row: `${studentdict[studentId.replace("-", "")].row}`,
         colum: RowFormDate ? RowFormDate : 0,
         answer: answer,
       };
-      // const res = await fetch(
-      //   "https://script.google.com/macros/s/AKfycbwsZOaJ9JYw6aDZKZECkqSRAOz6gxFMqV_rbR-ECGM2TV2yUEs4wxvQaTn1m0l65mQ8/exec",
-      //   {
-      //     method: "POST",
-      //     body: new URLSearchParams(data),
-      //   }
-        
-      // );
-      const res = await fetch(
-        "https://script.google.com/macros/s/AKfycbzUkt7AvaavEIrjna_xh8NoGuXKScWO9susSSBe7tS_k_KIByyddjFZccjGgPjv8ig/exec",
-        {
-          method: "POST",
-          body: new URLSearchParams(data),
-        }
-        
-      );
       
-      if (res.ok) {
-        setstudentname(`${studentdict[studentId.replace("-", "")].name}`);
-        setpopup("finishsave");
-      } else {
-        setstatus("Can't connect sever");
+      const apiUrl =
+        "https://script.google.com/macros/s/AKfycbxxviz0GEY-9SeJPqexQBXyQt2o_VHq0j6yphriSwrRlXFewjkaVppm8ZRoy_mcAVs/exec";
+      const urlParams = new URLSearchParams(data);
+
+      try {
+        const response = await fetch(`${apiUrl}?${urlParams.toString()}`, {
+          method: "POST",
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        } else{
+          setpopup("finishsave")
+        }
+
+        const result = await response.text();
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     } catch (error) {
       console.log("error", error);
     } finally {
       if (!date) {
+        
         setTimeout(() => {
           setpopup("notmatch");
         }, 3500);

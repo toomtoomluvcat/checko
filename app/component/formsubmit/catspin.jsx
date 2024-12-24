@@ -4,6 +4,7 @@ import Image from "next/image";
 function Catspin() {
   return (
     <div className="fixed inset-0 m-auto">
+      
       <div className="h-screen w-screen bg-black opacity-[30%]"></div>
       <div className="max-w-[470px] bg-white h-[460px] border-2 sm:h-[550px] flex fiexd inset-0 left-[50px] right-[50px] m-auto rounded-[20px] flex-col items-center absolute justify-center">
         <div className="text-center font-kanit space-y-[10px]">
