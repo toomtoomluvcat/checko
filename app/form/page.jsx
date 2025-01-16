@@ -375,7 +375,9 @@ function Form() {
         quality={100}
         src="/image/checko_form_image/Group 64.png"
       ></NextImage>
-      <button type='button' onClick={()=>setDistanceFromGoal(false)}>ปุ่มทดสอบ</button>
+      {/* <button type="button" onClick={() => setDistanceFromGoal(false)}>
+        ปุ่มทดสอบ
+      </button> */}
       {distanceFromGoal ? (
         <div className="relative flex items-center justify-center mt-[5vh] sm:mt-0 md:gap-x-[0px] xl:gap-x-[70px] mx-auto w-screen absolute">
           <div>
@@ -461,12 +463,93 @@ function Form() {
               ไม่สามารถเข้าถึงตำแหน่งได้<br></br>{" "}
               โปรดอนุญาตให้เว็บไซต์เข้าถึงตำแหน่งของคุณ
             </div>
-            <h4 className="text-[13px] mt-[5px]">
-              ไม่มีอะไรแสดงผล{" "}
-              <strong onClick={handleRetry} className="font-medium hover:underline transition-all duration-300 ">
+            <h4 className="text-[13px] mx-auto mt-[5px] max-w-[250px]">
+              ไม่มีอะไรแสดงผล หากยังไม่ได้ให้เลื่อนลงวิธีการเปิดใช้งานด้านล่าง
+              หรือ
+              <strong
+                onClick={handleRetry}
+                className="font-medium hover:underline transition-all duration-300 "
+              >
                 ลองอีกครั้ง
               </strong>
             </h4>
+          </div>
+          <div className="flex mx-auto mt-[70px] max-w-[650px] justify-between flex-wrap">
+            <div>
+              <NextImage
+                src="/image/W00.png"
+                width={1000}
+                height={1000}
+                alt="forimage"
+                className="w-[200px] mt-[100px] mx-auto "
+              ></NextImage>
+              <h2 className="font-normal  text-center mt-[15px] text-[13px]">
+                1.สำหรับ Android Chrom ให้ไปที่จุดสามจุดด้านขวาบน
+              </h2>
+            </div>
+            <div>
+              <NextImage
+                src="/image/W01.png"
+                width={1000}
+                height={1000}
+                alt="forimage"
+                className="w-[200px] mt-[100px] mx-auto "
+              ></NextImage>
+              <h2 className="font-normal text-center mt-[15px] text-[13px]">
+                2.คลิ๊กที่ icon รูปตัว i
+              </h2>
+            </div>
+
+            <div className="max-w-[300px]">
+              <NextImage
+                src="/image/W02.png"
+                width={1000}
+                height={1000}
+                alt="forimage"
+                className="w-[200px] mt-[100px] mx-auto "
+              ></NextImage>
+              <h2 className="font-normal max-w-[250px] text-center mt-[15px] text-[13px]">
+                3.เปิดการอนุญาตสิทธิ์ให้เว็บไซต์เข้าถึงตำแหน่งที่ตั้งของอุปกรณ์
+              </h2>
+            </div>
+            <div className="max-w-[300px]">
+              <NextImage
+                src="/image/W03.png"
+                width={1000}
+                height={1000}
+                alt="forimage"
+                className="w-[200px] mt-[100px] mx-auto "
+              ></NextImage>
+              <h2 className="font-normal max-w-[250px] text-center mt-[15px] text-[13px]">
+                4.เปิดใช้งานตามรูปที่แสดง
+              </h2>
+            </div>
+          </div>
+          <div className="mt-[150px]">
+            <div>
+              <NextImage
+                src="/image/I00.png"
+                width={1000}
+                height={1000}
+                alt="forimage"
+                className="w-[400px] mt-[100px] mx-auto "
+              ></NextImage>
+              <h2 className="font-normal max-w-[250px] mt-[20px] mx-auto text-center text-[13px]">
+                1.สำหรับ IOS ให้ไปที่ setting&gt;chorm&gt;location
+              </h2>
+            </div>
+            <div>
+              <NextImage
+                src="/image/I02.png"
+                width={1000}
+                height={1000}
+                alt="forimage"
+                className="w-[400px] mt-[50px] mx-auto "
+              ></NextImage>
+              <h2 className="font-normal max-w-[250px] mt-[20px] mb-[100px] mx-auto text-center   text-[13px]">
+                2.เปลี่ยนการเข้าถึง location<br></br> เป็นขณะใช้งานแอป
+              </h2>
+            </div>
           </div>
         </div>
       )}
