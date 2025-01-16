@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EXIF from "exif-js";
 import { DateTime } from "luxon";
 import Nav from "../component/nav";
@@ -12,6 +12,8 @@ import Notmatch from "../component/formsubmit/notmatch";
 import Confirmsubmit from "../component/formsubmit/confirmsubmit";
 
 function Form() {
+  const [location, setLocation] = useState(null);
+  const [distanceFromGoal, setDistanceFromGoal] = useState();
   const [exifData, setExifData] = useState();
   const [status, setstatus] = useState("");
   const [studentname, setstudentname] = useState();
@@ -226,18 +228,79 @@ function Form() {
     6730406762: { name: "นายพีรพัฒน์ วารินสะอาด", row: 164 },
   };
 
+  function toRadians(degrees) {
+    return (degrees * Math.PI) / 180;
+  }
+
+  function calculateDistance(lat1, lng1, lat2, lng2) {
+    const R = 6371000;
+    const lat1Rad = toRadians(lat1);
+    const lng1Rad = toRadians(lng1);
+    const lat2Rad = toRadians(lat2);
+    const lng2Rad = toRadians(lng2);
+
+    const deltaLat = lat2Rad - lat1Rad;
+    const deltaLng = lng2Rad - lng1Rad;
+
+    const a =
+      Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+      Math.cos(lat1Rad) *
+        Math.cos(lat2Rad) *
+        Math.sin(deltaLng / 2) *
+        Math.sin(deltaLng / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    const distance = R * c;
+    setDistanceFromGoal(distance);
+  }
+
+  const requestLocation = () => {
+    if (!navigator.geolocation) {
+      setstatus("Geolocation not supported");
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      () => {
+        setstatus("Location access denied. Please allow access.");
+      }
+    );
+  };
+
+  useEffect(() => {
+    requestLocation();
+  }, []);
+
+  const handleRetry = () => {
+    requestLocation();
+  };
+  useEffect(() => {
+    if (location) {
+      calculateDistance(
+        location?.latitude,
+        location?.longitude,
+        16.476280555555554,
+        102.82562222222222
+      );
+    }
+  }, [location]);
+
   const handlesubmit = async (e) => {
     e.preventDefault();
-    const file = document.getElementById("fileinput").files[0];
+    if (distanceFromGoal < 450) {
+      setstatus("You cannot submit because you are not in the classroom");
+      return;
+    }
     if (!answer || !studentId) {
       setstatus("please provide complete information");
       return;
     }
-    if (!file) {
-      setstatus("Input your image before submit!");
-      return;
-    }
-
     if (!studentdict[studentId.replace("-", "")]) {
       setstatus("dont match any student id");
       return;
@@ -247,82 +310,38 @@ function Form() {
     setpopup("confirm");
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const img = new Image();
-        img.src = event.target.result;
-        img.onload = function () {
-          EXIF.getData(img, function () {
-            const allTags = EXIF.getAllTags(this);
-            const dateTime = allTags.DateTime;
-            let date, time;
-            if (dateTime) {
-              const [datepart, timepart] = dateTime.split(" ");
-              date = datepart;
-              time = timepart;
-            }
-            const latitude = allTags.GPSLatitude;
-            const longtitude = allTags.GPSLongitude;
-            setDate(date);
-            setExifData({ date, time, latitude, longtitude });
-          });
-        };
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const onPopup = async () => {
     try {
       setpopup("loading");
-      const timeStamp = DateTime.now()
-        .setZone("Asia/Bangkok")
-        .toFormat("yyyy:LL:dd");
-      let RowFormDate =
-        classDate[
-          `${exifData.date.substring(8)}/${exifData.date.substring(5, 7)}`
-        ];
-      if (timeStamp !== exifData.date) {
-        RowFormDate = "0";
-      }
-      const hour = parseInt(exifData.time.substring(0, 2));
-      const minute = parseInt(exifData.time.substring(3, 5));
+      const timeStamp = DateTime.now().setZone("Asia/Bangkok");
+      const hour = timeStamp.hour;
+      const minute = timeStamp.minute;
+      let colFormDate = "";
       if (
         !(
           (hour > 9 || (hour === 9 && minute >= 0)) &&
           (hour < 10 || (hour === 10 && minute <= 30))
         )
       ) {
-        RowFormDate = "0";
+        colFormDate = "0";
+      } else {
+        colFormDate =
+          classDate[`${timeStamp.day}` + "/" + `${timeStamp.month}`];
       }
       const data = {
         studenid: studentId.replace("-", ""),
         name: `${studentdict[studentId.replace("-", "")].name}`,
-        timeStamp: timeStamp,
-        date: exifData.date,
-        time: exifData.time,
-        latitude: exifData.latitude
-          ? JSON.stringify(exifData.latitude).substring(
-              1,
-              JSON.stringify(exifData.latitude).length - 1
-            )
-          : "0",
-        longitude: exifData.longtitude
-          ? JSON.stringify(exifData.longtitude).substring(
-              1,
-              JSON.stringify(exifData.longtitude).length - 1
-            )
-          : "0",
+        timeStamp: timeStamp.toFormat("HH:mm:ss"),
+        date: timeStamp.toFormat("DD:MM:YYYY"),
+        latitude: location ? location?.latitude : 0,
+        longitude: location?.longitude,
         row: `${studentdict[studentId.replace("-", "")].row}`,
-        colum: RowFormDate ? RowFormDate : 0,
+        colum: colFormDate ? colFormDate : 0,
         answer: answer,
       };
-      
+
       const apiUrl =
-        "https://script.google.com/macros/s/AKfycbxxviz0GEY-9SeJPqexQBXyQt2o_VHq0j6yphriSwrRlXFewjkaVppm8ZRoy_mcAVs/exec";
+        "https://script.google.com/macros/s/AKfycbx4KV2zQt2R4Dtljo9Xg8TONQZPiMjWMtSto0Gl-c6gR8Xc95aMvUTlDc-gVXbv_kM/exec";
       const urlParams = new URLSearchParams(data);
 
       try {
@@ -332,8 +351,8 @@ function Form() {
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
-        } else{
-          setpopup("finishsave")
+        } else {
+          setpopup("finishsave");
         }
 
         const result = await response.text();
@@ -342,14 +361,6 @@ function Form() {
       }
     } catch (error) {
       console.log("error", error);
-    } finally {
-      if (!date) {
-        
-        setTimeout(() => {
-          setpopup("notmatch");
-        }, 3500);
-        return;
-      }
     }
   };
 
@@ -364,90 +375,100 @@ function Form() {
         quality={100}
         src="/image/checko_form_image/Group 64.png"
       ></NextImage>
-      <div className="relative flex items-center justify-center mt-[5vh] sm:mt-0 md:gap-x-[0px] xl:gap-x-[70px] mx-auto w-screen absolute">
-        <div>
-          <div className=" relative z-0 flex flex-col items-center">
-            <div className="text-center"></div>
-            <h2 className="text-center mb-[10px] text-[22px] font-medium">
-              กรอกข้อมูลเช็คชื่อ
-            </h2>
-            <h4 className="text-center">กรอกข้อมูลให้ครบถ้วนตามเงื่อนไข</h4>
-            <hr className="mt-[15px] sm:mt-[20px] w-[200px] sm:w-[350px] border-[1px] bg-black"></hr>
-          </div>
+      {distanceFromGoal ? (
+        <div className="relative flex items-center justify-center mt-[5vh] sm:mt-0 md:gap-x-[0px] xl:gap-x-[70px] mx-auto w-screen absolute">
           <div>
-            <form className="mt-[20px]  mx-auto" onSubmit={handlesubmit}>
-              <div className="mx-auto w-[300px] sm:w-[350px]">
-                <div className="flex flex-col gap-y-[10px] ">
-                  <label className="font-medium text-[16px]">
-                    <span>รหัสนักศึกษา</span>
-                    <span className="text-red-400">*</span>
-                  </label>
-                  <input
-                    placeholder="กรอกรหัสนักศึกษาที่นี่"
-                    onChange={(e) => setStudentId(e.target.value)}
-                    className="border-[2px] rounded-[15px] py-[7px] px-[15px]"
-                    type="text"
-                  ></input>
-                  <div className="flex flex-col gap-y-[10px]">
-                    <label className="font-medium mt-[10px] text-[16px]">
-                      <span>คำตอบ</span>
+            <div className=" relative z-0 flex flex-col items-center">
+              <div className="text-center"></div>
+              <h2 className="text-center mb-[10px] text-[22px] font-medium">
+                กรอกข้อมูลเช็คชื่อ
+              </h2>
+              <h4 className="text-center">กรอกข้อมูลให้ครบถ้วนตามเงื่อนไข</h4>
+              <hr className="mt-[15px] sm:mt-[20px] w-[200px] sm:w-[350px] border-[1px] bg-black"></hr>
+            </div>
+            <div>
+              <form className="mt-[20px]  mx-auto" onSubmit={handlesubmit}>
+                <div className="mx-auto w-[300px] sm:w-[350px]">
+                  <div className="flex flex-col gap-y-[10px] ">
+                    <label className="font-medium text-[16px]">
+                      <span>รหัสนักศึกษา</span>
                       <span className="text-red-400">*</span>
                     </label>
                     <input
-                      onChange={(e) => setanswer(e.target.value)}
-                      placeholder="กรอกคำตอบที่นี่"
+                      placeholder="กรอกรหัสนักศึกษาที่นี่"
+                      onChange={(e) => setStudentId(e.target.value)}
                       className="border-[2px] rounded-[15px] py-[7px] px-[15px]"
                       type="text"
                     ></input>
+                    <div className="flex flex-col gap-y-[10px]">
+                      <label className="font-medium mt-[10px] text-[16px]">
+                        <span>คำตอบ</span>
+                        <span className="text-red-400">*</span>
+                      </label>
+                      <input
+                        onChange={(e) => setanswer(e.target.value)}
+                        placeholder="กรอกคำตอบที่นี่"
+                        className="border-[2px] rounded-[15px] py-[7px] px-[15px]"
+                        type="text"
+                      ></input>
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-y-[10px]">
-                    <label className="font-medium mt-[10px] text-[16px]">
-                      <span>รูปภาพ</span>
-                      <span className="text-red-400">*</span>
-                    </label>
-                    <input
-                      placeholder="กรอกคำตอบที่นี่"
-                      className="file:rounded-[15px] file:px-[25px] file:py-[9px] file:text-white  file:mr-[18px] file:bg-[#A8A2A2] file:border-none"
-                      type="file"
-                      id="fileinput"
-                      accept="image/*"
-                      onChange={handleFileChange}
-                    ></input>
-                  </div>
-                </div>
 
-                <button
-                  type="submit"
-                  className="flex mx-auto px-[108px] sm:px-[130px] my-[15px] text-white bg-black hover:bg-[#202020] hover:text-[#e4e4e4] rounded-[25px] border-[3px] border-[#7e7e7e ] py-[12px]"
-                >
-                  บันทึกข้อมูล
-                </button>
-                <div className="flex gap-x-[7px] text-[15px] ml-[10px] absolute">
-                  <span className="text-[#5C5C5C]">
-                    คุณยังไม่รู้วิธีการใช้งานแบบฟอร์ม?
-                  </span>
-                  <span className="font-medium text-black hover:text-[#404040] transition-all duration-300 ease-in-out">
-                    <Link href="/howToUse">วิธีการใช้งาน</Link>
-                  </span>
-                </div>
-                {status && (
-                  <div className="font-light text-[15px] text-red-400 mt-[25px] ml-[10px] absolute">
-                    {status}
+                  <button
+                    type="submit"
+                    className="flex mx-auto px-[108px] sm:px-[130px] my-[15px] text-white bg-black hover:bg-[#202020] hover:text-[#e4e4e4] rounded-[25px] border-[3px] border-[#7e7e7e ] py-[12px]"
+                  >
+                    บันทึกข้อมูล
+                  </button>
+                  <div className="flex gap-x-[7px] text-[15px] ml-[10px] absolute">
+                    <span className="text-[#5C5C5C]">
+                      คุณยังไม่รู้วิธีการใช้งานแบบฟอร์ม?
+                    </span>
+                    <span className="font-medium text-black hover:text-[#404040] transition-all duration-300 ease-in-out">
+                      <Link href="/howToUse">วิธีการใช้งาน</Link>
+                    </span>
                   </div>
-                )}
-              </div>
-            </form>
+                  {status && (
+                    <div className="font-light text-[15px] text-red-400 mt-[25px] ml-[10px] absolute">
+                      {status}
+                    </div>
+                  )}
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <NextImage
+            src="/image/checko_form_image/checko_form.png"
+            width={1500}
+            height={1500}
+            alt="forimage"
+            className="w-[650px] hidden md:block"
+          ></NextImage>
+        </div>
+      ) : (
+        <div>
+          <NextImage
+            src="/image/670dd2cf1b914229436ce529_025-min.png"
+            width={1000}
+            height={1000}
+            alt="forimage"
+            className="w-[200px] mt-[100px] mx-auto "
+          ></NextImage>
+          <div className="mx-auto text-center">
+            <div>
+              ไม่สามารถเข้าถึงตำแหน่งได้<br></br>{" "}
+              โปรดอนุญาตให้เว็บไซต์เข้าถึงตำแหน่งของคุณ
+            </div>
+            <h4 className="text-[13px] mt-[5px]">
+              ไม่มีอะไรแสดงผล{" "}
+              <strong onClick={handleRetry} className="font-medium hover:underline transition-all duration-300 ">
+                ลองอีกครั้ง
+              </strong>
+            </h4>
           </div>
         </div>
-
-        <NextImage
-          src="/image/checko_form_image/checko_form.png"
-          width={1500}
-          height={1500}
-          alt="forimage"
-          className="w-[650px] hidden md:block"
-        ></NextImage>
-      </div>
+      )}
       {popup === "loading" && <Catspin></Catspin>}
       {popup === "finishsave" && (
         <Finishsave studentName={studentname}></Finishsave>
