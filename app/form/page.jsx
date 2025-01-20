@@ -293,7 +293,7 @@ function Form() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    if (distanceFromGoal < 450) {
+    if (distanceFromGoal > 450) {
       setstatus("You cannot submit because you are not in the classroom");
       return;
     }
@@ -387,6 +387,13 @@ function Form() {
                 กรอกข้อมูลเช็คชื่อ
               </h2>
               <h4 className="text-center">กรอกข้อมูลให้ครบถ้วนตามเงื่อนไข</h4>
+              <div className={distanceFromGoal<450? "text-green-400":"text-red-400"}>
+                <h4 className="text-[13px] mt-4">
+                  {distanceFromGoal < 450
+                    ? "อยู่ในห้องเรียน"
+                    : "ไม่ได้อยู่ในห้องเรียน"}
+                </h4>
+              </div>
               <hr className="mt-[15px] sm:mt-[20px] w-[200px] sm:w-[350px] border-[1px] bg-black"></hr>
             </div>
             <div>
@@ -450,7 +457,7 @@ function Form() {
           ></NextImage>
         </div>
       ) : (
-        <div>
+        <div className="flex flex-col items-center justify-center">
           <NextImage
             src="/image/670dd2cf1b914229436ce529_025-min.png"
             width={1000}
@@ -459,11 +466,11 @@ function Form() {
             className="w-[200px] mt-[100px] mx-auto "
           ></NextImage>
           <div className="mx-auto text-center">
-            <div>
+            <div className="sm:text-[15px] text-[13px] px-[30px]">
               ไม่สามารถเข้าถึงตำแหน่งได้<br></br>{" "}
               โปรดอนุญาตให้เว็บไซต์เข้าถึงตำแหน่งของคุณ
             </div>
-            <h4 className="text-[13px] mx-auto mt-[5px] max-w-[250px]">
+            <h4 className="text-[11px] px-[30px] sm:text-[13px] mx-auto mt-[5px] max-w-[250px]">
               ไม่มีอะไรแสดงผล หากยังไม่ได้ให้เลื่อนลงวิธีการเปิดใช้งานด้านล่าง
               หรือ
               <strong
@@ -475,7 +482,7 @@ function Form() {
             </h4>
           </div>
           <div className="flex mx-auto mt-[70px] max-w-[650px] justify-between flex-wrap">
-            <div>
+            <div className="mx-auto ">
               <NextImage
                 src="/image/W00.png"
                 width={1000}
@@ -483,11 +490,11 @@ function Form() {
                 alt="forimage"
                 className="w-[200px] mt-[100px] mx-auto "
               ></NextImage>
-              <h2 className="font-normal  text-center mt-[15px] text-[13px]">
+              <h2 className="font-normal px-[30px]  text-center mt-[15px] text-[13px]">
                 1.สำหรับ Android Chrom ให้ไปที่จุดสามจุดด้านขวาบน
               </h2>
             </div>
-            <div>
+            <div className="mx-auto ">
               <NextImage
                 src="/image/W01.png"
                 width={1000}
@@ -512,7 +519,7 @@ function Form() {
                 3.เปิดการอนุญาตสิทธิ์ให้เว็บไซต์เข้าถึงตำแหน่งที่ตั้งของอุปกรณ์
               </h2>
             </div>
-            <div className="max-w-[300px]">
+            <div className="mx-auto max-w-[300px]">
               <NextImage
                 src="/image/W03.png"
                 width={1000}
@@ -525,7 +532,7 @@ function Form() {
               </h2>
             </div>
           </div>
-          <div className="mt-[150px]">
+          <div className="px-[30px] mt-[150px]">
             <div>
               <NextImage
                 src="/image/I00.png"

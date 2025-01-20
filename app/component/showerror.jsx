@@ -23,7 +23,7 @@ function ShowError({onclick}) {
             แจ้งปรับปรุงเว็บไซต์ใหม่
           </h1>
           <p className="sm:text-[15px] w-[70%] text-[14px] text-[#5B5B5B]">
-            ตอนนี้เว็บไซต์สามารถตรวจสอบ ip adress ได้เลย โดยไม่จำเป็นต้องใช้รูปภาพในการยืนยันแล้ว จึงขอความร่วมมือผู้ใช้งาน ให้เว็บไซต์เข้าถึง ip adress ผ่านการอนุญาต (ไม่จำเป็นต้องเปิด GPS)
+            ตอนนี้เว็บไซต์สามารถตรวจสอบ ip adress ได้เลย โดยไม่จำเป็นต้องใช้รูปภาพในการยืนยันแล้ว จึงขอความร่วมมือผู้ใช้งาน ให้เว็บไซต์เข้าถึง ip adress ผ่านการอนุญาต (จำเป็นต้องเปิด GPS)
           </p>
           <button >
          <p onClick={onclick} className="bg-[#323232] mt-[15px] sm:mt-[20px] text-[14px] sm:text-[17px] text-white w-[170px] sm:w-[220px] shadow-inner py-[12px] rounded-[25px]">
