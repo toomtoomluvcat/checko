@@ -293,7 +293,7 @@ function Form() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    if (distanceFromGoal > 450) {
+    if (distanceFromGoal > 250) {
       setstatus("You cannot submit because you are not in the classroom");
       return;
     }
@@ -389,7 +389,7 @@ function Form() {
               <h4 className="text-center">กรอกข้อมูลให้ครบถ้วนตามเงื่อนไข</h4>
               <div className={distanceFromGoal<450? "text-green-400":"text-red-400"}>
                 <h4 className="text-[13px] mt-4">
-                  {distanceFromGoal < 450
+                  {distanceFromGoal < 250
                     ? "อยู่ในห้องเรียน"
                     : "ไม่ได้อยู่ในห้องเรียน"}
                 </h4>
