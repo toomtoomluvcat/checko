@@ -392,7 +392,7 @@ function Form() {
                 }
               >
                 <h4 className="text-[13px] mt-4">
-                  {distanceFromGoal > 250
+                  {distanceFromGoal < 250
                     ? "อยู่ในห้องเรียน"
                     : "ไม่ได้อยู่ในห้องเรียน"}
                 </h4>

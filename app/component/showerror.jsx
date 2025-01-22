@@ -5,7 +5,7 @@ function ShowError({onclick}) {
   return (
     <div className="fixed inset-0 m-auto">
       <div className="h-screen w-screen bg-black opacity-[30%]"></div>
-      <div className="max-w-[470px] bg-white h-[460px] sm:h-[550px] flex fiexd inset-0 left-[50px] right-[50px] m-auto rounded-[20px] flex-col items-center absolute justify-center">
+      <div className="max-w-[470px] bg-white h-[550px] sm:h-[550px] flex fiexd inset-0 left-[50px] right-[50px] m-auto rounded-[20px] flex-col items-center absolute justify-center">
         <div className="relative w-[140px] h-[140px] sm:w-[170px] bottom-[50px] mb-[-90px] sm:mb-[-70px] sm:h-[170px]">
           <Image
            

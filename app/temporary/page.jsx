@@ -321,7 +321,7 @@ function Form() {
       if (
         !(
           (hour > 9 || (hour === 9 && minute >= 0)) &&
-          (hour < 10 || (hour === 10 && minute <= 30))
+          (hour < 10 || (hour === 10 && minute <= 40))
         )
       ) {
         colFormDate = "0";
