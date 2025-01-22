@@ -346,7 +346,7 @@ function Form() {
       };
 
       let url =
-        "https://api.sheety.co/198501d3d858aa8cff12db41f95a6a2c/physicAttendance/attendance";
+        "https://api.sheety.co/77e25d8d7d11fa027c2f140906d9b773/physicAttendance/attendance";
       let body = JSON.stringify(data); // Ensure the body matches the structure of `data`
 
       // ส่งคำขอ
@@ -383,16 +383,16 @@ function Form() {
             <div className=" relative z-0 flex flex-col items-center">
               <div className="text-center"></div>
               <h2 className="text-center mb-[10px] text-[22px] font-medium">
-                กรอกข้อมูลเช็คชื่อ
+                กรอกข้อมูลเช็คชื่อ(สำรอง)
               </h2>
               <h4 className="text-center">กรอกข้อมูลให้ครบถ้วนตามเงื่อนไข</h4>
               <div
                 className={
-                  distanceFromGoal < 450 ? "text-green-400" : "text-red-400"
+                  distanceFromGoal < 250 ? "text-green-400" : "text-red-400"
                 }
               >
                 <h4 className="text-[13px] mt-4">
-                  {distanceFromGoal > 250
+                  {distanceFromGoal < 250
                     ? "อยู่ในห้องเรียน"
                     : "ไม่ได้อยู่ในห้องเรียน"}
                 </h4>
@@ -435,10 +435,10 @@ function Form() {
                   </button>
                   <div className="flex gap-x-[7px] text-[15px] ml-[10px] absolute">
                     <span className="text-[#5C5C5C]">
-                      เช็คชื่อแล้วไม่ขึ้นใน sheet?
+                      คุณยังไม่รู้วิธีการใช้งานแบบฟอร์ม?
                     </span>
                     <span className="font-medium text-black hover:text-[#404040] transition-all duration-300 ease-in-out">
-                      <Link href="/temporary">สำรองตรงนี้</Link>
+                      <Link href="/howToUse">วิธีการใช้งาน</Link>
                     </span>
                   </div>
                   {status && (
