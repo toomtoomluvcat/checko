@@ -1,9 +1,10 @@
-import mongoose from "mongoose";
+import mysql from "mysql2/promise";
 
-export const dbconnect= async()=>{
-    try{
-    await mongoose.connect(process.env.MONGODB_URI)
-    } catch (error){
-        console.log('error', error)
-    }
-}
+const pool = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "toomsql",
+  database: "my_database",
+});
+
+export default pool;

@@ -98,6 +98,14 @@ function Page() {
             >
               Prae
             </a>
+            <a
+              href=""
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rgb-hover"
+            >
+              ,Phai
+            </a>
             <br />
             and the Computer Engineering Team
           </p>

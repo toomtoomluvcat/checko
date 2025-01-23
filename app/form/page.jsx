@@ -293,7 +293,7 @@ function Form() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    if (distanceFromGoal > 250) {
+    if (distanceFromGoal < 250) {
       setstatus("You cannot submit because you are not in the classroom");
       return;
     }
@@ -306,6 +306,23 @@ function Form() {
       return;
     } else {
       setstudentname(studentdict[studentId.replace("-", "")].name);
+    }
+    const timeStamp = DateTime.now().setZone("Asia/Bangkok");
+    const hour = timeStamp.hour;
+    const minute = timeStamp.minute;
+    let colFormDate = "";
+
+    if (
+      !(
+        (hour > 9 || (hour === 9 && minute >= 0)) &&
+        (hour < 10 || (hour === 10 && minute <= 30))
+      )
+    ) {
+      colFormDate = "0";
+      setstatus("มาสายเช็คไม่ได้แล้ว")
+      // return;
+    } else {
+      colFormDate = classDate[`${timeStamp.day}` + "/" + `${timeStamp.month}`];
     }
     setpopup("confirm");
   };
@@ -330,34 +347,25 @@ function Form() {
           classDate[`${timeStamp.day}` + "/" + `${timeStamp.month}`];
       }
 
-      // รูปแบบใหม่ที่ตรงตามที่ต้องการ
       const data = {
-        attendance: {
-          studentid: studentId.replace("-", ""), // ใช้ studentId ที่ไม่มีเครื่องหมาย "-"
-          name: `${studentdict[studentId.replace("-", "")].name}`, // ใช้ชื่อจาก studentdict
-          timestamp: timeStamp.toFormat("HH:mm:ss"), // ใช้เวลา
-          date: timeStamp.toFormat("DD:MM:YYYY"), // ใช้วันที่
-          latitude: location ? location.latitude : 0, // ใช้ latitude จาก location หรือ 0 ถ้าไม่มี
-          longitude: location ? location.longitude : 0, // ใช้ longitude จาก location หรือ 0 ถ้าไม่มี
-          row: `${studentdict[studentId.replace("-", "")].row}`, // ใช้ row จาก studentdict
-          colum: colFormDate ? colFormDate : 0, // ใช้ colFormDate หรือ 0 ถ้าไม่มี
-          answer: answer, // คำตอบ
-        },
+        studentId: studentId.replace("-", ""),
+        name: `${studentdict[studentId.replace("-", "")].name}`,
+        timeStamp: timeStamp.toFormat("HH:mm:ss dd:MM:yyyy"),
+        rowExcel: `${studentdict[studentId.replace("-", "")].row}`,
+        columExcel: colFormDate ? colFormDate : 0,
+        answer: answer,
       };
 
-      let url =
-        "https://api.sheety.co/198501d3d858aa8cff12db41f95a6a2c/physicAttendance/attendance";
-      let body = JSON.stringify(data); // Ensure the body matches the structure of `data`
-
-      // ส่งคำขอ
-      await fetch(url, {
+      const res = await fetch("/api/users", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: body,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
-      setpopup("finishsave"); 
+      if (res.ok) {
+        setpopup("finishsave");
+      } else {
+        alert("error  ");
+      }
     } catch (error) {
       console.log("error", error);
     }
@@ -435,10 +443,10 @@ function Form() {
                   </button>
                   <div className="flex gap-x-[7px] text-[15px] ml-[10px] absolute">
                     <span className="text-[#5C5C5C]">
-                      เช็คชื่อแล้วไม่ขึ้นใน sheet?
+                      คุณยังไม่รู้วิธีการใช้งานแบบฟอร์ม?
                     </span>
                     <span className="font-medium text-black hover:text-[#404040] transition-all duration-300 ease-in-out">
-                      <Link href="/temporary">สำรองตรงนี้</Link>
+                      <Link href="/howToUse">วิธีการใช้งาน</Link>
                     </span>
                   </div>
                   {status && (

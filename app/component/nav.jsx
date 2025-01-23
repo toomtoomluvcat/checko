@@ -10,7 +10,7 @@ function Nav() {
                 <Link href='/form'><li className='hidden md:block hover:text-[#5a5a5a] transition-all duration-300 ease-in-out'>Form</li></Link>
                 <Link href='https://github.com/toomtoomluvcat/checko'><li className='hidden md:block hover:text-[#5a5a5a] transition-all duration-300 ease-in-out'>GitHub</li></Link>
                 <Link target='blank'
-                 href='https://docs.google.com/spreadsheets/d/1aOklifcp5SNvkdTZBSN-lIkj7ZpEEYpzRKiTcB9lnXg/edit?usp=sharing'
+                 href='/history'
                  ><li className='hover:text-[#5a5a5a] transition-all duration-300 ease-in-out'>Submit history</li>
                  </Link>
             </ul>
