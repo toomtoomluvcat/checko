@@ -87,18 +87,21 @@ function page() {
            ติดต่ออาจารย์
           </a>
         </div>
+       
         {showdata ? (
-          <div className="lg:w-[900px] mt-[75px] w-[350px] md:w-[700px] p-4">
+          <div className="lg:w-[900px] mt-[55px] w-[350px] md:w-[700px] p-4">
+             <p className="text-center mb-4">{studentCheck[0]?.name}</p>
             <div className="overflow-x-auto shadow-md rounded-lg">
+           
               <table className="w-full">
                 <thead className="bg-gray-100 border-b">
                   <tr>
                     <th className="p-3  text-xs sm:text-sm md:text-base text-left text-gray-700 uppercase tracking-wider">
-                      Student name
+                      Date
                     </th>
 
                     <th className="p-3 text-xs sm:text-sm md:text-base text-left text-gray-700 uppercase tracking-wider">
-                      Date
+                      time
                     </th>
 
                     <th className="p-3  text-xs sm:text-sm md:text-base text-left text-gray-700 uppercase tracking-wider">
@@ -115,10 +118,10 @@ function page() {
                         className="hover:bg-gray-50 transition-colors duration-200"
                       >
                         <td className="p-3  text-xs sm:text-sm md:text-base">
-                          {student.name}
+                        {date}
                         </td>
                         <td className="p-3 text-xs sm:text-sm md:text-base">
-                          {date}
+                          {time}
                         </td>
 
                         <td className="p-3 text-xs sm:text-sm md:text-base">
