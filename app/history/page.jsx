@@ -38,7 +38,25 @@ function page() {
     };
   };
   return (
-    <div>
+    <div className="relative ">
+      {loading && (
+        <div className="fixed w-full h-full border-2">
+          <div className="absolute bg-white px-[30px] py-[50px] min-w-[320px] rounded-[15px] border-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <p className="text-center text-[1.2em] text-auto mb-2 font-medium">
+              กำลังเข้าถึงฐานข้อมูล
+            </p>
+            <p className="text-gray-400 mb-8 text-center mx-auto max-w-[220px]">
+              ตรงนี้ยังว่างรับขึ้นโฆษณาหน้าโหลดราคาถูกนะครับ
+            </p>
+            <img
+              src="https://f.ptcdn.info/974/064/000/pukmwx2842lZptp3D4KC-o.jpg"
+              className="w-[170px] mx-auto"
+              alt="รถแห่"
+            />
+          </div>
+        </div>
+      )}
+
       <Nav></Nav>
       <div className="flex max-w-[600px] mb-[140px] mx-auto flex-col items-center">
         <Image
@@ -84,15 +102,14 @@ function page() {
             href="https://physics.sc.kku.ac.th/?page_id=727"
             className="text-[13px] p-[8px] rounded-[7px] bg-[#EAEAEA]  text-474747"
           >
-           ติดต่ออาจารย์
+            ติดต่ออาจารย์
           </a>
         </div>
-       
+
         {showdata ? (
           <div className="lg:w-[900px] mt-[55px] w-[350px] md:w-[700px] p-4">
-             <p className="text-center mb-4">{studentCheck[0]?.name}</p>
+            <p className="text-center mb-4">{studentCheck[0]?.name}</p>
             <div className="overflow-x-auto shadow-md rounded-lg">
-           
               <table className="w-full">
                 <thead className="bg-gray-100 border-b">
                   <tr>
@@ -118,7 +135,7 @@ function page() {
                         className="hover:bg-gray-50 transition-colors duration-200"
                       >
                         <td className="p-3  text-xs sm:text-sm md:text-base">
-                        {date}
+                          {date}
                         </td>
                         <td className="p-3 text-xs sm:text-sm md:text-base">
                           {time}
