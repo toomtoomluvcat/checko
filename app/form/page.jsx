@@ -293,7 +293,7 @@ function Form() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    if (distanceFromGoal < 250) {
+    if (distanceFromGoal > 300) {
       setstatus("You cannot submit because you are not in the classroom");
       return;
     }
@@ -320,7 +320,7 @@ function Form() {
     ) {
       colFormDate = "0";
       setstatus("มาสายเช็คไม่ได้แล้ว")
-      // return;
+      
     } else {
       colFormDate = classDate[`${timeStamp.day}` + "/" + `${timeStamp.month}`];
     }
