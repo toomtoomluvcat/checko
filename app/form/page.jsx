@@ -320,6 +320,7 @@ function Form() {
     ) {
       colFormDate = "0";
       setstatus("มาสายเช็คไม่ได้แล้ว")
+      return;
       
     } else {
       colFormDate = classDate[`${timeStamp.day}` + "/" + `${timeStamp.month}`];
