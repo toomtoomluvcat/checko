@@ -293,7 +293,7 @@ function Form() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    if (distanceFromGoal > 300) {
+    if (distanceFromGoal <300) {
       setstatus("You cannot submit because you are not in the classroom");
       return;
     }
